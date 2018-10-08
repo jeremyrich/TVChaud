@@ -1,0 +1,58 @@
+@font-face {
+    font-family: 'Uni Sans Thin';
+    src: url('../fonts/Uni Sans Thin.otf');
+}
+
+.app {
+    margin-top: 60px;
+}
+
+.header-custom {
+    background: #5e5e5e !important;
+}
+
+.navbar-custom {
+    margin-top: 5px;
+}
+
+.navbar-custom > li {
+    float: none;
+    display: inline-block;
+}
+
+.navbar-custom > li > a {
+    color: white !important;
+    padding: 5%;
+    line-height: 40px;
+    font-size: 40px;
+    font-family: 'Uni Sans Thin';
+}
+
+.dropdown-custom > .dropdown > a {
+    color: white !important;
+}
+
+.dropdown-custom > .open > a {
+    background-color: gray !important;
+}
+
+.dropdown-menu-custom {
+    background-color: #5e5e5e;
+}
+
+.dropdown-menu-custom > li > a {
+    color: white;
+}
+
+.dropdown-menu-custom > li > a:hover,
+.dropdown-menu-custom > li > a:focus {
+  text-decoration: none;
+  color: white;
+  background-color: gray;
+}
+
+.btn-app {
+    background-image: url('../icon/hellofresh_logo.png');
+    background-repeat: no-repeat;
+    background-position: 8em 3em;
+}
