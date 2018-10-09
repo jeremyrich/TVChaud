@@ -11,19 +11,13 @@
         <title>{% block title %}TV Chaud{% endblock %}</title>
     </head>
 
-    <body>
+    <body class="body-custom">
         {% block header %}
             {% include 'header.html' %}
         {% endblock %}
 
-        <div class="app">
-            <div class="container-fluid">
-
-                {% block my_app %}
-                    {% block content%}Default{% endblock %}
-                {% endblock %}
-
-            </div>
+        <div class="container-fluid">
+            {% block content %}Default{% endblock %}
         </div>
     </body>
 
