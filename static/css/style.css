@@ -1,6 +1,13 @@
 @font-face {
-    font-family: 'Raleway-Regular';
+    font-family: Raleway;
     src: url('../fonts/Raleway-Regular.ttf');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: Raleway;
+    src: url('../fonts/Raleway-Black.ttf');
+    font-weight: bold;
 }
 
 .navbar-custom {
@@ -11,7 +18,8 @@
 .navbar-custom > a {
     color: #61AFEF;
     font-size: 30px;
-    font-family: 'Raleway-Black';
+    font-family: Raleway;
+    font-weight: bold;
 }
 
 .navbar-custom > li {
@@ -24,7 +32,7 @@
     padding: 5%;
     line-height: 40px;
     font-size: 40px;
-    font-family: 'Raleway-Regular';
+    font-family: Raleway;
 }
 
 
@@ -32,7 +40,7 @@
 /* User dropdown in Header */
 .dropdown-custom > a {
     color: lightgray !important;
-    font-family: 'Raleway-Regular';
+    font-family: Raleway;
     font-size: 15px;
 }
 
@@ -50,7 +58,7 @@
 
 .dropdown-menu-custom > li > a:hover,
 .dropdown-menu-custom > li > a:focus {
-    font-family: 'Raleway-Regular';
+    font-family: Raleway;
     text-decoration: none;
     color: lightgray;
     background-color: gray;
@@ -79,6 +87,6 @@
 .body-custom {
     margin-top: 50px;
     color: white;
-    font-family: 'Raleway-Black';
+    font-family: Raleway;
     background-color: #444444
 }
