@@ -1,5 +1,18 @@
 from django.shortcuts import render
+import requests
+from .APIClient import APIClient
+
 
 # Create your views here.
 def home(request):
-    return render(request, 'series/home.html', locals())
+
+    client = APIClient()
+    result = client.get_popular_shows()
+
+    images = []
+    for movies in result['results']:
+        images += ['https://image.tmdb.org/t/p/w500' + movies['poster_path']]
+
+    output = {'images': images}
+
+    return render(request, 'series/home.html', output)

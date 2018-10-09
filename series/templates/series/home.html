@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Salut les potes !</h1>
+    {% for im in images %}
+        <img src="{{ im }}" />
+    {% endfor %}
 {% endblock %}
