@@ -118,6 +118,9 @@ LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'login'
 
 
+TMDB_API_KEY = '2d832a4fe0a9c0d174c2620f590830f6'
+
+
 # Internationalization
 # https://docs.djangoproject.com/en/2.1/topics/i18n/
 
