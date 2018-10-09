@@ -1,18 +1,17 @@
 @font-face {
-    font-family: 'Uni Sans Thin';
-    src: url('../fonts/Uni Sans Thin.otf');
-}
-
-.app {
-    margin-top: 60px;
-}
-
-.header-custom {
-    background: #5e5e5e !important;
+    font-family: 'Raleway-Regular';
+    src: url('../fonts/Raleway-Regular.ttf');
 }
 
 .navbar-custom {
-    margin-top: 5px;
+    background: #4F4F4F !important;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-custom > a {
+    color: #61AFEF;
+    font-size: 30px;
+    font-family: 'Raleway-Black';
 }
 
 .navbar-custom > li {
@@ -25,34 +24,61 @@
     padding: 5%;
     line-height: 40px;
     font-size: 40px;
-    font-family: 'Uni Sans Thin';
+    font-family: 'Raleway-Regular';
 }
 
-.dropdown-custom > .dropdown > a {
-    color: white !important;
+
+
+/* User dropdown in Header */
+.dropdown-custom > a {
+    color: lightgray !important;
+    font-family: 'Raleway-Regular';
+    font-size: 15px;
 }
 
-.dropdown-custom > .open > a {
+.toggle-custom:hover, .toggle-custom:focus {
     background-color: gray !important;
 }
 
 .dropdown-menu-custom {
-    background-color: #5e5e5e;
+    background-color: #4F4F4F;
 }
 
 .dropdown-menu-custom > li > a {
-    color: white;
+    color: lightgray;
 }
 
 .dropdown-menu-custom > li > a:hover,
 .dropdown-menu-custom > li > a:focus {
-  text-decoration: none;
-  color: white;
-  background-color: gray;
+    font-family: 'Raleway-Regular';
+    text-decoration: none;
+    color: lightgray;
+    background-color: gray;
 }
 
-.btn-app {
-    background-image: url('../icon/hellofresh_logo.png');
-    background-repeat: no-repeat;
-    background-position: 8em 3em;
+.search-icon {
+    max-width:20px;
+    max-height:20px;
+    width: auto;
+    height: auto;
+}
+
+.search-button:hover, .search-button:focus {
+    background-color: gray !important;
+}
+
+.member-icon {
+    max-width:20px;
+    max-height:20px;
+    width: auto;
+    height: auto;
+}
+
+
+/* Body generic CSS */
+.body-custom {
+    margin-top: 50px;
+    color: white;
+    font-family: 'Raleway-Black';
+    background-color: #444444
 }
