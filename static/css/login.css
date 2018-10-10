@@ -1,0 +1,79 @@
+.login-page {
+    background-image: -webkit-linear-gradient(-40deg, #444444 50%, #0096FF 50%);
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
+.login-col {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.login-title {
+    color: lightgray;
+    font-size: 10vh;
+    font-weight: bold;
+    width: 100%;
+}
+
+.login-panel {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    color: white;
+    font-size: 1.5vw;
+}
+
+
+/* Buttons Google and Facebook */
+.login-btn {
+    color: white;
+    font-family: Raleway;
+    width: 100%;
+    font-size: 1.3vw;
+    margin-top: 2%;
+}
+
+.login-btn > .col-xs-9 {
+    color: white;
+    font-size: 1.3vw;
+    text-align: left;
+}
+
+.login-btn > .col-xs-3 {
+    text-align: right;
+}
+
+.login-btn > div > img {
+    max-width: 1.3vw;
+    max-height: 1.3vw;
+    width: auto;
+    height: auto;
+}
+
+.login-google {
+    background-color: #DD4B39;
+}
+
+.login-google:hover {
+    background-color: #E25746
+}
+
+.login-google:active {
+    background-color: #D1342B;
+}
+
+.login-facebook {
+    background-color: #3B5998;
+}
+
+.login-facebook:hover {
+    background-color: #4c6cb2;
+}
+
+.login-facebook:active {
+    background-color: #3351A2;
+}

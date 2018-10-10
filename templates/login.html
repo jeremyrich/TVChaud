@@ -1,105 +1,52 @@
+{% extends 'base.html' %}
+
 {% load static %}
+{% block title %}TVChaud - Login{% endblock %}
 
-<!DOCTYPE html>
-<html lang="en">
+{% block static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/login.css' %}"/>
+{% endblock %}
 
-    <head>
-        <title>Nautilus - Login</title>
-        <link rel="icon" type="image/png" sizes="96x96" href="{% static 'icon/yellow-submarine-icon.png'%}">
-        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.css' %}"/>
-        <style type="text/css">
+{% block header %}{% endblock %}
 
-            @font-face {
-                font-family: 'Raleway-Black';
-                src: url('../static/fonts/Raleway-Black.ttf');
-            }
+{% block body %}
 
-            @font-face {
-                font-family: 'Raleway-Regular';
-                src: url('../static/fonts/Raleway-Regular.ttf');
-            }
+    <body class="login-page">
+        <div class="container-fluid">
 
-            body, html {
-                height: 100%;
-                background-color: #5e5e5e;
-            }
+            <div class="col-xs-6 login-col">
 
-            body > div {
-                height: 100%;
-            }
+                <div class="login-title">
+                    <span style="color: #0096FF;">TV</span>Chaud
+                </div>
 
-            .login-title {
-                color: lightgray;
-                font-size: 12vh;
-                font-family: "Raleway-Black";
-                text-align: right;
-                padding-top: 40vh;
-            }
+            </div>
 
-            .login-panel {
-                opacity: 0.8;
-                background-color: #2b2b2b;
-                width: 400px;
-                height: 245px;
-                margin-top: 35vh;
-                margin-left: 18vw;
-                box-shadow: 5px 5px 10px black;
-                border: 10px solid transparent;
-                border-radius: 10px;
-            }
+            <div class="col-xs-6 login-col">
 
-            .login-panel > h4 {
-                color: lightgray;
-                font-family: "Raleway-Regular";
-                text-align: center;
-            }
-
-            .login-panel > form {
-                padding-bottom: 0px;
-            }
-
-            .login-panel > form > input {
-                background-color: transparent;
-                margin-bottom: 3px;
-                border-color: #5e5e5e;
-            }
-
-            .login-panel > form > input:disabled {
-                background-color: transparent;
-                margin-bottom: 3px;
-                border-color: #5e5e5e;
-            }
-
-            .login-panel > form > button, .login-google {
-                width: 100%;
-                font-family: "Raleway-Regular";
-            }
-
-        </style>
-    </head>
-
-    <body>
-        <div class="col-xs-5 login-title">
-            TV Chaud
-        </div>
-        <div class="col-xs-7">
-
-            <div class="login-panel">
-                <h4>Log in with TV Chaud account</h4>
-                <form method="post" action="">
-                    {% csrf_token %}
-                    {{ form.username }}
-                    {{ form.password }}
-                    <button class="btn btn-primary" disabled><b>Log in</b></button>
-                </form>
-
-                <h4>or</h4>
-
-                <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn btn-danger login-google">Sign in with Google</a>
+                <div class="login-panel">
+                    Open the gates to the 7th art
+                    <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn login-google login-btn">
+                        <div class="col-xs-3">
+                            <img src="{% static 'icons/googlepluslogin.png' %}"/>
+                        </div>
+                        <div class="col-xs-9">
+                            Sign in with Google
+                        </div>
+                    </a>
+                    <a class="btn login-facebook login-btn">
+                        <div class="col-xs-3">
+                            <img src="{% static 'icons/facebooklogin.png' %}"/>
+                        </div>
+                        <div class="col-xs-9">
+                            Log in with Facebook
+                        </div>
+                    </a>
+                </div>
 
             </div>
 
         </div>
     </body>
 
-</html>
+{% endblock %}

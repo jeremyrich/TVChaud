@@ -11,17 +11,19 @@
         <title>{% block title %}TV Chaud{% endblock %}</title>
     </head>
 
-    <body class="body-custom">
-        {% block header %}
-            {% include 'header.html' %}
-        {% endblock %}
+    {% block body %}
+        <body class="body-custom">
+            {% block header %}
+                {% include 'header.html' %}
+            {% endblock %}
 
-        <div class="container-fluid">
-            {% block content %}Default{% endblock %}
-        </div>
-    </body>
+            <div class="container-fluid">
+                {% block content %}Default{% endblock %}
+            </div>
+        </body>
+    {% endblock %}
 
-    {% block static_code %}{% endblock %}
+    {% block static %}{% endblock %}
     {% block javascript %}{% endblock %}
 
 </html>
