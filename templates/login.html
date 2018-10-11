@@ -34,7 +34,7 @@
                             Sign in with Google
                         </div>
                     </a>
-                    <a class="btn login-facebook login-btn">
+                    <a href="{% url 'social:begin' 'facebook' %}" class="btn login-facebook login-btn">
                         <div class="col-xs-3">
                             <img src="{% static 'icons/facebooklogin.png' %}"/>
                         </div>

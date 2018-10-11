@@ -1,9 +1,12 @@
 from django.shortcuts import render
 import requests
 from .APIClient import APIClient
+from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+
+@login_required
 def home(request):
 
     client = APIClient()
