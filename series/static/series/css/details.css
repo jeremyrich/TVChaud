@@ -1,0 +1,34 @@
+.menu {
+    padding-top: 7vh;
+}
+
+
+
+.movie-title {
+    color: lightgray;
+    font-size: 7vh;
+    text-align: left;
+    vertical-align: top;
+    font-weight: bold;
+    padding-bottom: 1vh;
+}
+
+.movie-description {
+    padding-bottom: 5vh;
+    font-style: italic;
+}
+
+.titles {
+    font-weight: bold;
+}
+
+.movie-infos {padding-bottom: 3vh;}
+
+.movie-reviews {
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+}
+
+.movie {background-color: green;}
+
+.bigger-titles {font-size: 3vh;}
