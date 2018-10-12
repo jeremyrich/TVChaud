@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block static %}
+<link rel="stylesheet" type="text/css" href="{% static 'series/css/details.css' %}"/>
+{% endblock%}
+
+
+{% block content %}
+
+    <div class="col-xs-2 menu">
+        Menu à gauche<br/>
+        Acteurs<br/>
+        Reviews<br/>
+        D'autres trucs<br/>
+        D'autres trucs<br/>
+        D'autres trucs<br/>
+        D'autres trucs<br/>
+        D'autres trucs<br/>
+        D'autres trucs<br/>
+        D'autres trucs<br/>
+        D'autres trucs<br/>
+        D'autres trucs<br/>
+    </div>
+
+    <span class="movie">
+    <div class="col-xs-10 movie-title">
+        Titre du film
+    </div>
+
+
+    <div class="col-xs-3 movie-image">
+            <img src="http://fr.web.img3.acsta.net/medias/nmedia/18/68/61/99/19425646.jpg" width=100%/>
+    </div>
+
+    <div class="col-xs-5">
+        <div class="movie-description">
+        Voici une description du film, avec scénario etc... On mettra plein de trucs là-dedans donc il y aura du texte xxxxxxxxxxxxxxxxxxxxxxxxxxxx.
+        </div>
+
+        <div class="movie infos">
+        Rating: 8.9/10
+
+        Duration: 1h39
+
+        Genres: Drama, Comedy
+
+        Release date: 10/10/2018
+
+        Director: Steven Spielberg
+
+        Country of origin: France
+        </div>
+    </div>
+
+    <div class="col-xs-8 col-xs-offset-2 movie-actors">
+        <span class="titles bigger-titles">Actors: </span><br/>
+        Morgan Freeman<br/>
+        Matt Damon<br/>
+        Brad Pitt<br/>
+
+    </div>
+
+    <div class="col-xs-8 col-xs-offset-2 movie-reviews">
+        <span class="titles bigger-titles">Reviews: </span><br/>
+        8/10: Great movie, nice one.<br/>
+        6/10: Funny but nor the best.<br/>
+    </div>
+
+    </span>
+
+{% endblock %}
+

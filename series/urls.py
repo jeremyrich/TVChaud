@@ -22,4 +22,5 @@ app_name = 'series'
 
 urlpatterns = [
     path('home', views.home),
+    path('details', views.details, name='details')
 ]

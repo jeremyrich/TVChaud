@@ -19,3 +19,7 @@ def home(request):
     output = {'images': images}
 
     return render(request, 'series/home.html', output)
+
+def details(request):
+
+    return render(request, 'series/details.html', locals())
