@@ -8,6 +8,14 @@
 
 {% block content %}
     {% for im in images %}
-        <a class="cover-btn" href="{% url 'series:details' %}"><img class="serie-cover" src="{{ im }}" /></a>
+        <a class="cover-btn" onclick="showSerieSheet()"><img class="serie-cover" src="{{ im }}" /></a>
     {% endfor %}
 {% endblock %}
+
+<!-- {% block javascript %}
+    <script>
+        function showSerieSheet() {
+            $('#dialog').modal('show');
+        };
+     </script>
+{% endblock %} -->
