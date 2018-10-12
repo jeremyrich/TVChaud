@@ -1,34 +1,58 @@
 .menu {
-    padding-top: 7vh;
+    padding-top: 20px;
 }
 
+.movies {
+    background-color: #4F4F4F;
+    padding-left: 10px;
+    border-radius: 4px;
+}
 
+img {
+    margin: 5px;
+}
 
 .movie-title {
     color: lightgray;
-    font-size: 7vh;
+    font-size: 36px;
     text-align: left;
     vertical-align: top;
     font-weight: bold;
-    padding-bottom: 1vh;
+    padding-bottom: 5px;
+    padding-top: 10px
 }
 
 .movie-description {
-    padding-bottom: 5vh;
+    padding-bottom: 30px;
     font-style: italic;
 }
 
-.titles {
+.movie-infos {padding-bottom: 15px;}
+
+.movie-actors {
+    padding-bottom: 15px;
+}
+
+.movie-reviews {
+    padding-bottom: 20px;
+}
+
+
+.bigger-titles {
+    font-size: 20px;
     font-weight: bold;
 }
 
-.movie-infos {padding-bottom: 3vh;}
-
-.movie-reviews {
-    padding-top: 5vh;
-    padding-bottom: 5vh;
+.similar-movies {
+    margin-top: 20px;
+    background-color: #4F4F4F;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-radius: 4px;
+    color: lightgray;
 }
 
-.movie {background-color: green;}
-
-.bigger-titles {font-size: 3vh;}
+.similar-example {
+    text-align: center;
+    color: white;
+}
