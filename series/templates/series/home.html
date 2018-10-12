@@ -1,7 +1,13 @@
 {% extends 'base.html' %}
 
+{% load static %}
+
+{% block static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'series/css/home.css' %}"/>
+{% endblock %}
+
 {% block content %}
     {% for im in images %}
-        <img src="{{ im }}"/>
+        <a class="cover-btn" href="{% url 'series:details' %}"><img class="serie-cover" src="{{ im }}" /></a>
     {% endfor %}
 {% endblock %}

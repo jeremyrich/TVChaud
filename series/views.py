@@ -20,6 +20,7 @@ def home(request):
 
     return render(request, 'series/home.html', output)
 
-def details(request):
 
+@login_required
+def details(request):
     return render(request, 'series/details.html', locals())
