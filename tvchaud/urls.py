@@ -19,6 +19,8 @@ from django.views.generic.base import RedirectView
 import series.views as series
 from . import views
 
+app_name = 'tvchaud'
+
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='series/home'), name='home'),
 
