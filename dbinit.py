@@ -4,6 +4,7 @@ conn = sqlite3.connect('tvchaud.db')
 
 cursor = conn.cursor()
 
+# Table : USER
 cursor.execute("""
     CREATE TABLE user (
         user_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -16,6 +17,7 @@ cursor.execute("""
     );
 """)
 
+# Table : FAVORITE
 cursor.execute("""
     CREATE TABLE favorite (
         favorite_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -25,6 +27,7 @@ cursor.execute("""
     )
 """)
 
+# Table : FRIENDSHIP
 cursor.execute("""
     CREATE TABLE friendship (
         friendship_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -34,6 +37,7 @@ cursor.execute("""
     )
 """)
 
+# Table : FRIEND_REQUEST
 cursor.execute("""
     CREATE TABLE friend_request (
         friend_request_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -44,6 +48,7 @@ cursor.execute("""
     )
 """)
 
+# Table : NOTIFICATION_TYPE
 cursor.execute("""
     CREATE TABLE notification_type (
         notification_type_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -52,7 +57,13 @@ cursor.execute("""
         update_date DATETIME
     )
 """)
+cursor.execute("""
+    INSERT INTO notification_type(name, insert_date, update_date) VALUES
+    ('New episode', DATETIME(), DATETIME()),
+    ('Friend Request', DATETIME(), DATETIME())
+""")
 
+# Table : NOTIFICATION
 cursor.execute("""
     CREATE TABLE notification (
         notification_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
@@ -64,6 +75,8 @@ cursor.execute("""
         update_date DATETIME
     )
 """)
+
+
 
 conn.commit()
 conn.close()
