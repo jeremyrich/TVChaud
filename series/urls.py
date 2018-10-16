@@ -16,11 +16,13 @@ Including another URLconf
 
 from django.contrib import admin
 from django.conf.urls import url
+from django.views.generic.base import RedirectView
 from . import views
 
 app_name = 'series'
 
 urlpatterns = [
+    url(r'^$', RedirectView.as_view(url='home'),  name='home'),
     url(r'^home', views.home, name='home'),
     url(r'^details', views.details, name='details')
 ]
