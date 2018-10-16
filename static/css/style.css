@@ -20,6 +20,12 @@ div {
     background-color: #444444
 }
 
+.login-page {
+    background-image: -webkit-linear-gradient(-40deg, #444444 50%, #0096FF 50%);
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+
 .content-custom {
     padding: 1vw;
     color: white;
