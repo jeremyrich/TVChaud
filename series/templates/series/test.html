@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{id}}</title>
+
+    <h1>Reviews</h1>
+    <p>
+    {% for review in reviews %}
+    <p>auteur: {{review.author}}</p>
+    <p> {{review.content}}</p>
+    {% endfor %}</p>
+
+    <p>nombre d'épisodes: {{details.number_of_episodes}}</p>
+    <p>pays d'origine est {{details.origin_country}}</p>
+    <p>la langue est  {{details.language}} </p>
+    <p>popularité : {{details.popularity}}</p>
+    <img src="{{details.poster}}" />
+    <p>first_aired: {{details.first_air_date}}</p>
+    <p>next episode: {{details.next_episode_to_air.air_date}}</p>
+
+
+    <p>les réalisateurs du film {{details.name}} sont :</p>
+    {% for real in details.realisateur %}
+        <p>{{real}}</p>
+    {% endfor %}
+
+    <p>les acteurs du film {{details.name}} sont :</p>
+    {% for actor in cast.actors %}
+        <p>{{actor.character}} est joué par {{actor.name}}</p>
+        <img src="{{ actor.profile_path }}" />
+    {% endfor %}
+
+
+
+</head>
+<body>
+
+</body>
+</html>
