@@ -24,3 +24,11 @@ def home(request):
 @login_required
 def details(request):
     return render(request, 'series/details.html', locals())
+
+@login_required
+def test(request, tv_id):
+    client = APIClient()
+    details = client.get_tv_show_details(tv_id)
+    reviews = client.get_tv_shows_reviews(tv_id)
+    cast = client.get_tv_show_cast(tv_id)
+    return render(request, 'series/test.html', locals())
