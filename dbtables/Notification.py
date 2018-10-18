@@ -1,19 +1,10 @@
 class Notification():
-    def __init__(self, user_id, text=None):
+    def __init__(self, user_id, text=None, notification_type_id):
+        if text is not None:
+            self.text = text
         self.user_id = user_id
         self.seen = 0
+        self.notification_type_id = notification_type_id
 
-
-
-# Table : NOTIFICATION
-cursor.execute("""
-    CREATE TABLE notification (
-        notification_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-        user_id INTEGER,
-        message TEXT,
-        notification_type_id INTEGER,
-        seen TINYINT(1),
-        insert_date DATETIME,
-        update_date DATETIME
-    )
-""")
+    def read_notification(self):
+        self.seen = 1

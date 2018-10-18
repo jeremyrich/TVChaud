@@ -1,14 +1,10 @@
-class FriendReques():
+class FriendRequest():
+    def __init__(self, from_user, to_user, text=None):
+        self.user_id = from_user
+        self.to_user = to_user
+        if text is not None:
+            self.text = text
+        self.request = 0
 
 
 
-# Table : FRIEND_REQUEST
-cursor.execute("""
-    CREATE TABLE friend_request (
-        friend_request_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-        from_user INTEGER,
-        to_user INTEGER,
-        message TEXT,
-        insert_date DATETIME
-    )
-""")
