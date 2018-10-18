@@ -1,0 +1,39 @@
+.register-col {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+}
+
+.register-panel {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    color: white;
+    font-size: 1.5vw;
+}
+
+.register-form {
+    width: 20vw;
+}
+
+.register-form > input {
+    background-color: #474747;
+    border-color: #333333;
+    color: white;
+    margin-bottom: 4px;
+}
+
+.register-form > button {
+    width: -webkit-fill-available;
+}
+
+.error-password {
+    border: 1px solid #A51010;
+    color: #A51010;
+    border-radius: 4px;
+    background-color: #EF7070;
+    font-size: 14px;
+    margin-bottom: 8px;
+}
