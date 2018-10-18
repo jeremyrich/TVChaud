@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block title %}TVChaud - Register{% endblock %}
+
+{% block static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}"/>
+{% endblock %}
+
+{% block header %}{% endblock %}
+
+{% block body %}
+
+    <body class="login-page">
+        <div class="container-fluid">
+
+            <div class="register-col">
+
+                <div class="register-panel">
+
+                    <form class="register-form" method="post" action="">
+                        {% csrf_token %}
+
+                        {% if error %}
+                            <div class="error-password">
+                                The passwords do not match
+                            </div>
+                        {% endif %}
+
+                        {{ form.first_name }}
+                        {{ form.last_name }}
+                        {{ form.email }}
+                        {{ form.password }}
+                        {{ form.confirm_password }}
+
+                        <button class="btn btn-primary">Register</button>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </body>
+
+{% endblock %}

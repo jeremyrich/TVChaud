@@ -1,6 +1,6 @@
 import sqlite3
 
-conn = sqlite3.connect('tvchaud.db')
+conn = sqlite3.connect('tvchaud.db', check_same_thread=False)
 cursor = conn.cursor()
 
 def query(command, data=None):
@@ -14,5 +14,3 @@ def query(command, data=None):
     else:
         my_query = cursor.execute(command, data)
     return my_query
-
-
