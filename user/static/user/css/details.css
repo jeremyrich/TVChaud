@@ -1,0 +1,26 @@
+.menu {
+    padding-top: 20px;
+}
+
+.users {
+    background-color: #4F4F4F;
+    padding-left: 10px;
+    border-radius: 4px;
+    padding-bottom: 20px;
+    margin-top: 10px;
+}
+
+img {
+    margin: 5px;
+}
+
+.user-name {
+    color: lightgray;
+    font-size: 36px;
+    text-align: left;
+    vertical-align: top;
+    font-weight: bold;
+    padding-bottom: 5px;
+    padding-top: 10px
+}
+

@@ -5,4 +5,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def user_details(request, user_id):
-    return render(request, 'user/details.html')
+
+    output = {'user_id': user_id}
+
+    return render(request, 'user/details.html', output)

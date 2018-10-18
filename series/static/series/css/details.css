@@ -2,18 +2,42 @@
     padding-top: 20px;
 }
 
+.button {
+	font-size: 16px;
+	background-color: #0096FF;
+	display: inline-block;
+	border: 3px solid #0096FF;
+    color: white;
+    padding: 3px 15px;
+    padding-top: 0px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+
+    margin-top: 10px;
+}
+
+.button:hover {
+	background-color: #4F4F4F;
+	color: #0096FF;
+	cursor: pointer;
+}
+
 .movies {
     background-color: #4F4F4F;
     padding-left: 10px;
     border-radius: 4px;
+    padding-bottom: 20px;
 }
 
 img {
     margin: 5px;
 }
 
-.movie-title {
-    color: lightgray;
+.title {
+    color: #0096FF;
     font-size: 36px;
     text-align: left;
     vertical-align: top;
@@ -23,25 +47,29 @@ img {
 }
 
 .movie-description {
+    padding-top: 10px;
     padding-bottom: 30px;
     font-style: italic;
+    text-align: justify;
 }
 
 .movie-infos {padding-bottom: 15px;}
 
 .movie-actors {
-    padding-bottom: 15px;
+    padding-bottom: 5px;
 }
 
-.movie-reviews {
-    padding-bottom: 20px;
-}
-
-
-.bigger-titles {
+.small-title {
     font-size: 20px;
     font-weight: bold;
+    padding-bottom: 5px;
 }
+
+.actor-description {
+    line-height: 35px;
+}
+
+.actor-name {color: #0096FF;}
 
 .similar-movies {
     margin-top: 20px;
@@ -55,4 +83,11 @@ img {
 .similar-example {
     text-align: center;
     color: white;
+}
+
+.review {padding-bottom: 10px;}
+
+.review-author {
+    text-align: right;
+    font-style: italic;
 }

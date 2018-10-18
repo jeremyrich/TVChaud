@@ -10,20 +10,26 @@ from django.contrib.auth.decorators import login_required
 def home(request):
 
     client = APIClient()
-    result = client.get_popular_shows()
+    movies = client.get_popular_shows()
 
-    images = []
-    for movies in result['results']:
-        images += ['https://image.tmdb.org/t/p/w500' + movies['poster_path']]
-
-    output = {'images': images}
+    output = {'movies': movies}
 
     return render(request, 'series/home.html', output)
 
 
 @login_required
-def details(request):
-    return render(request, 'series/details.html', locals())
+def details(request, tv_id):
+
+    client = APIClient()
+    details = client.get_tv_show_details(tv_id)
+    reviews = client.get_tv_shows_reviews(tv_id)
+    cast = client.get_tv_show_cast(tv_id)
+    season_cast = client.get_tv_show_season_cast(tv_id)
+    similar = client.get_tv_shows_similar(tv_id)
+
+    output = {'client': client, 'details': details, 'reviews': reviews, 'cast': cast, 'season_cast': season_cast,
+              'similar': similar}
+    return render(request, 'series/details.html', output)
 
 @login_required
 def test(request, tv_id):
@@ -31,4 +37,7 @@ def test(request, tv_id):
     details = client.get_tv_show_details(tv_id)
     reviews = client.get_tv_shows_reviews(tv_id)
     cast = client.get_tv_show_cast(tv_id)
-    return render(request, 'series/test.html', locals())
+    season_cast = client.get_tv_show_season_cast(tv_id)
+
+    output = {'client': client, 'details': details, 'reviews': reviews, 'cast': cast, 'season_cast': season_cast}
+    return render(request, 'series/test.html', output)
