@@ -26,7 +26,7 @@
     {% endfor %}
 
     <p>les acteurs du film {{details.name}} sont :</p>
-    {% for actor in cast.actors %}
+    {% for actor in season_cast.actors %}
         <p>{{actor.character}} est joué par {{actor.name}}</p>
         <img src="{{ actor.profile_path }}" />
     {% endfor %}

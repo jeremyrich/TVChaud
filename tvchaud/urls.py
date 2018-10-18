@@ -28,7 +28,7 @@ urlpatterns = [
 
     url(r'^login/', views.mylogin, name='login'),
     url(r'^logout/', views.mylogout, name='logout'),
-    #url(r'^register/', views.register, name='register'),
+    # url(r'^register/', views.register, name='register'),
     url(r'^auth/', include('social_django.urls', namespace='social')),
 
     url(r'^series/', include('series.urls')),
