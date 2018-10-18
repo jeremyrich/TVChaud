@@ -25,7 +25,7 @@ class User:
     def get_email(self):
         return self.__email
 
-    def get_email(self):
+    def get_password(self):
         return self.__password
 
     #setters
@@ -44,6 +44,15 @@ class User:
 
 
     # static methods
+    @staticmethod
+    def get_user_by_email(email):
+        print(User.get_all_users())
+        script = """SELECT * FROM user WHERE email='""" + email + """'"""
+        qresult = query(script)[0]
+        user = User(qresult[1], qresult[2], qresult[3], qresult[4], qresult[0])
+        return user
+
+    @staticmethod
     def get_all_users():
         script = """SELECT * FROM user"""
         users = query(script)
