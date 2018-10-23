@@ -124,5 +124,6 @@ class APIClient:
         else:
             for result in similar['results']:
                 result['poster_path'] = 'https://image.tmdb.org/t/p/w500' + result['poster_path']
+                result['id'] = 'http://localhost:8000/series/details/' + str(result['id'])
 
             return similar['results'][:12]

@@ -104,7 +104,8 @@
 
         {% for sim in similar %}
             <div class="col-xs-1 similar-example">
-                <img src="{{ sim.poster_path }}" height=100px width=70px /> {{ sim.name }}
+                <a href="{{ sim.id }}" class="cover-btn"><img src="{{ sim.poster_path }}" class="cover-btn"
+                                                              height=100px width=70px /> {{ sim.name }}</a>
             </div>
         {% endfor %}
 
