@@ -91,3 +91,7 @@ img {
     text-align: right;
     font-style: italic;
 }
+
+.cover-btn:hover {
+    filter: brightness(80%);
+}
