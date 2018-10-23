@@ -48,10 +48,12 @@ class User:
         query(command, data)
 
     def get_my_favorites(self):
-        command = """SELECT * FROM favorite WHERE """
-        my_favorite = query(command)
-        my_favorite = Favorite(my_favorite['favorite_id'], my_favorite['user_id'], my_favorite['tv_id'])
-        return my_favorite
+        command = """SELECT * FROM favorite WHERE user_id=?"""
+        my_favorite = query(command, self.__user_id)
+        favorites = []
+        for fav in my_favorite:
+            favorites.append(Favorite(fav[1], fav[2]))
+        return favorites
 
     def accept_friend_request():
         # Ajouter l'ami aux 2 users
@@ -70,7 +72,6 @@ class User:
     # static methods
     @staticmethod
     def get_user_by_email(email):
-        print(User.get_all_users())
         script = """SELECT * FROM user WHERE email='""" + email + """'"""
         qresult = query(script)[0]
         user = User(qresult[1], qresult[2], qresult[3], qresult[4], qresult[0])
