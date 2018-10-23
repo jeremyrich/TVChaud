@@ -26,5 +26,6 @@ urlpatterns = [
     url(r'^home', views.home, name='home'),
     url(r'^details/(?P<tv_id>.+)', views.details, name='details'),
     url(r'^test/(?P<tv_id>.+)', views.test, name='test'),
+    url(r'^my_favorites', views.favorite, name='favorite'),
 
 ]

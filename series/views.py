@@ -2,8 +2,7 @@ from django.shortcuts import render
 import requests
 from .APIClient import APIClient
 from django.contrib.auth.decorators import login_required
-
-
+import Multithreading
 # Create your views here.
 
 @login_required
@@ -41,3 +40,14 @@ def test(request, tv_id):
 
     output = {'client': client, 'details': details, 'reviews': reviews, 'cast': cast, 'season_cast': season_cast}
     return render(request, 'series/test.html', output)
+
+@login_required
+def favorite(request):
+    # Retourne une liste d'objets Favorite
+    Favorites = request.User.get_my_favorites()
+    # on appelle le multithreading depuis les objets Favorites
+    favorites_details = Multithreading.get_user_favorites(Favorites)
+    return (request, 'series/my_favorites.html', locals())
+
+
+
