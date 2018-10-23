@@ -16,10 +16,10 @@ class User:
     def get_user_id(self):
         return self.__user_id
 
-    def get_email(self):
+    def get_first_name(self):
         return self.__first_name
 
-    def get_email(self):
+    def get_last_name(self):
         return self.__last_name
 
     def get_email(self):
@@ -41,6 +41,30 @@ class User:
         data = {'first_name': self.__first_name, 'last_name': self.__last_name, 'email': self.__email, 'password': self.__password, 'insert_date': datetime.now()}
         script = """INSERT INTO user(first_name, last_name, email, password, insert_date) VALUES (:first_name, :last_name, :email, :password, :insert_date)"""
         query(script, data)
+
+    def add_favorite(self, tv_id):
+        command = """INSERT INTO favorite(user_id, tv_id) VALUES(?, ?)"""
+        data = (self.__user_id, tv_id)
+        query(command, data)
+
+    def get_my_favorites(self):
+        command = """SELECT * FROM favorite WHERE """
+        my_favorite = query(command)
+        my_favorite = Favorite(my_favorite['favorite_id'], my_favorite['user_id'], my_favorite['tv_id'])
+        return my_favorite
+
+    def accept_friend_request():
+        # Ajouter l'ami aux 2 users
+        pass
+
+    def send_friend_request(self, to_user, text=None):
+        if text == None:
+            command = """INSERT INTO friend_request(from_user, to_user) VALUES(?, ?)"""
+            data = (self.__user_id, to_user)
+        else:
+            command = """INSERT INTO friend_request(from_user, to_user, message) VALUES(?, ?, ?)"""
+            data = (self.__user_id, to_user, text)
+        query(command, data)
 
 
     # static methods
