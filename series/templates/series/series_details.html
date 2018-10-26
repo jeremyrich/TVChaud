@@ -10,6 +10,11 @@
 {% block content %}
 
     <div class="col-xs-2 seasons">
+
+        <div class="col-xs-12 small-title">
+            <a href="{{ show_details.link }}">{{ show_details.name }}<a/>
+        </div>
+
         {% for season in details.seasons %}
             <div class="col-xs-12 season">
                 <a href="{{ season.id }}" class="cover-btn season">
