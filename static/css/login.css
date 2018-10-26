@@ -21,27 +21,39 @@
     font-size: 1.5vw;
 }
 
+.register-link {
+    font-size: 1vw;
+    color: #444444;
+}
 
-/* Buttons Google and Facebook */
-.login-btn {
+
+/* Login form and Buttons Google and Facebook */
+.login-field {
+    padding: 5%;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color: black;
+}
+
+.login-div {
     color: white;
     font-family: Raleway;
     width: 100%;
     font-size: 1.3vw;
-    margin-top: 2%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 
-.login-btn > .col-xs-9 {
+.login-div > .col-xs-9 {
     color: white;
     font-size: 1.3vw;
     text-align: left;
 }
 
-.login-btn > .col-xs-3 {
+.login-div > .col-xs-3 {
     text-align: right;
 }
 
-.login-btn > div > img {
+.login-div > div > img {
     max-width: 1.3vw;
     max-height: 1.3vw;
     width: auto;

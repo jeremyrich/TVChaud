@@ -30,3 +30,12 @@ div {
     padding: 1vw;
     color: white;
 }
+
+.error-message {
+    border: 1px solid #A51010;
+    color: #A51010;
+    border-radius: 4px;
+    background-color: #EF7070;
+    font-size: 14px;
+    margin-bottom: 8px;
+}

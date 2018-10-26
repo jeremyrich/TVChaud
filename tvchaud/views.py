@@ -1,20 +1,23 @@
-from django.shortcuts import render
-from user.forms import LoginForm
+from django.shortcuts import render, redirect
 
 from dbtables.User import User
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 
 # login page
 def mylogin(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            message = 'logging in'
+        pass
+
     else:
-        form = LoginForm()
+        form = AuthenticationForm()
+        form.fields['username'].widget.attrs['class'] = 'form-control login-div login-field'
+        form.fields['username'].widget.attrs['placeholder'] = 'Username'
+        form.fields['password'].widget.attrs['class'] = 'form-control login-div login-field'
+        form.fields['password'].widget.attrs['placeholder'] = 'Password'
 
     return render(request, 'login.html', locals())
 
@@ -22,30 +25,17 @@ def mylogin(request):
 # logout redirect
 def mylogout(request):
     logout(request)
-    return render(request, 'login.html')
+    return redirect('login')
 
 
 # create user
 def register(request):
     if request.method == 'POST':
-        form = LoginForm(request.POST)
-
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            first_name = form.cleaned_data.get('first_name')
-            last_name = form.cleaned_data['last_name']
-            email = form.cleaned_data['email']
-            password = form.cleaned_data['password']
-            confirm_password = form.cleaned_data['confirm_password']
-
-            if password != confirm_password:
-                return render(request, 'register.html', {'error': True, 'form': form})
-
-            new_user = User(first_name, last_name, email)
-            new_user.set_password(make_password(password))
-
-            new_user.insert()
-
-            return render(request, 'login.html')
+            form.save()
+            return redirect('login')
+        return render(request, 'register.html', {'form': form})
     else:
-        form = LoginForm()
+        form = UserCreationForm()
         return render(request, 'register.html', {'form': form})

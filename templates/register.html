@@ -21,17 +21,19 @@
                     <form class="register-form" method="post" action="">
                         {% csrf_token %}
 
-                        {% if error %}
-                            <div class="error-password">
-                                The passwords do not match
-                            </div>
+                        {% if form.errors %}
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <div class="error-message">
+                                        {{ error|escape }}
+                                    </div>
+                                {% endfor %}
+                            {% endfor %}
                         {% endif %}
-
-                        {{ form.first_name }}
-                        {{ form.last_name }}
-                        {{ form.email }}
-                        {{ form.password }}
-                        {{ form.confirm_password }}
+                                
+                        {{ form.username }}
+                        {{ form.password1 }}
+                        {{ form.password2 }}
 
                         <button class="btn btn-primary">Register</button>
                     </form>
@@ -43,4 +45,22 @@
         </div>
     </body>
 
+{% endblock %}
+
+{% block javascript %}
+    <script>
+        $(function() {
+            username_field = $('#id_username');
+            username_field.addClass('form-control login-div login-field');
+            username_field.attr('placeholder', 'Username');
+
+            password1_field = $('#id_password1');
+            password1_field.addClass('form-control login-div login-field');
+            password1_field.attr('placeholder', 'Password');
+
+            password2_field = $('#id_password2');
+            password2_field.addClass('form-control login-div login-field');
+            password2_field.attr('placeholder', 'Confirm password');
+        });
+    </script>
 {% endblock %}
