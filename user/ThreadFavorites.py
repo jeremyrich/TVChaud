@@ -4,19 +4,19 @@ import time
 
 class ThreadFavorites(Thread):
 
-    def __init__(self, Favorite):
+    def __init__(self, favorite):
         Thread.__init__(self)
-        self.Favorite = Favorite
+        self.Favorite = favorite
 
     def run(self):
-        self.Favorite.get_favorite_details()
+        self.favorite.get_favorite_details()
 
 
-def get_user_favorites(Favorites):
+def get_user_favorites(favorites):
     Threads = []
-    for Favorite in Favorites:
-        Threads.append(ThreadFavorites(Favorite))
-    for k in range(0, len(Favorites)):
+    for favorite in favorites:
+        Threads.append(ThreadFavorites(favorite))
+    for k in range(0, len(favorites)):
         Threads[k].start()
     for l in range(0, len(Threads)):
         Threads[l].join()
