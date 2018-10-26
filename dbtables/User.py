@@ -11,18 +11,22 @@ class User:
         self.__password = request.user.password
 
     # getters
-    def get_user_id(self):
+    def _get_user_id(self):
         return self.__user_id
 
-    def get_password(self):
+    def _get_username(self):
+        return self.__username
+
+    def _get_password(self):
         return self.__password
 
-    #setters
-    def set_password(self, password):
-        self.__password = password
+    # properties
+    user_id = property(_get_user_id)
+    username = property(_get_username)
+    password = property(_get_password)
 
 
-    # methods for db
+    # methods
     def add_favorite(self, tv_id):
         command = """INSERT INTO favorite(user_id, tv_id) VALUES(?, ?)"""
         data = (self.__user_id, tv_id)
