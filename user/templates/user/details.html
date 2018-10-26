@@ -9,35 +9,36 @@
 {% block content %}
 
      <div class="col-xs-2 menu">
-            Menu à gauche<br/>
-            Profil<br/>
-            Profil<br/>
-            Autre chose<br/>
-            Autre chose<br/>
-            Autre chose<br/>
-            Autre chose<br/>
-            Autre chose<br/>
-            Autre chose<br/>
-            Autre chose<br/>
-            Autre chose<br/>
-            Autre chose<br/>
+            <b>User name :</b><br/>
+            {{user.username}}<br/>
+            <b>Number of favorite tv shows :</b><br/>
+            {{favorites_details|length}}<br/>
+
         </div>
 
     <div class="col-xs-8 users">
 
-    <div class="col-xs-12 user-name">
-        User {{ user_id }}: Hervé Biausser
-    </div>
-
-    <div class="col-xs-4 user-image">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Herv%C3%A9_Biausser%2C_directeur_Ecole_Centrale_Paris.jpg/260px-Herv%C3%A9_Biausser%2C_directeur_Ecole_Centrale_Paris.jpg"
-                 width=100% />
-    </div>
+        {% for favorite in favorites_details %}
+            <div class="col-xs-12 favorites">
+                {{ favorite.name }}: Hervé Biausser
+            </div>
 
 
-        <div class="col-xs-8 user-id">
-            <b>User ID: </b> {{ user_id }}
+        {% endfor %}
+
+        <div class="col-xs-12 user-name">
+            User {{ user_id }}: Hervé Biausser
         </div>
+
+        <div class="col-xs-4 user-image">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Herv%C3%A9_Biausser%2C_directeur_Ecole_Centrale_Paris.jpg/260px-Herv%C3%A9_Biausser%2C_directeur_Ecole_Centrale_Paris.jpg"
+                     width=100% />
+        </div>
+
+
+            <div class="col-xs-8 user-id">
+                <b>User ID: </b> {{ user_id }}
+            </div>
 
 
     </div>
