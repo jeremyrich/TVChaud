@@ -1,7 +1,8 @@
-/* For the title */
+/* Title */
 .navbar-custom {
     background: #4F4F4F !important;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+    height: 50px;
 }
 
 .navbar-custom > a {
@@ -11,63 +12,103 @@
     font-weight: bold;
 }
 
-.navbar-custom > li {
-    float: none;
-    display: inline-block;
-}
 
-.navbar-custom > li > a {
-    color: white !important;
-    padding: 5%;
-    line-height: 40px;
-    font-size: 40px;
-    font-family: Raleway;
-}
-
-
-/* From the dropdown */
+/* Dropdown */
 .dropdown-custom > a {
     color: lightgray !important;
     font-family: Raleway;
     font-size: 15px;
 }
 
-.toggle-custom:hover, .toggle-custom:focus {
-    background-color: gray !important;
+.dropdown-header-custom {
+    font-weight: bold;
+    color: lightgray;
+    margin: 4px 8px;
 }
 
-.dropdown-menu-custom {
+
+/* Icons */
+.dropdown-btn-container {
+    height: 50px;
+}
+
+.dropdown-btn {
+    margin: 7px;
+    display: inline-block;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 36px;
+    color: white;
+    background-color: #4F4F4F !important;
+}
+
+.dropdown-btn:hover, .dropdown-btn:focus {
+    filter: brightness(80%);
+    text-decoration: none;
+    color: white;
+}
+
+.notif-alert {
+    background-color: #E53939 !important;
+}
+
+.header-icon {
+    margin: 7px;
+    width: 22px;
+    height: 22px;
+}
+
+.username-text {
+    margin-right: 7px;
+}
+
+
+/* Notifications */
+.dropdown-notif-custom {
+    background-color: #4F4F4F;
+    min-width: 320px;
+}
+
+.notif-container {
+    height: 64px;
+}
+
+.notif-message {
+    height: 60px;
+    margin: 2px 4px;
+    display: inline-block;
+    width: 312px;
+    border-radius: 5px;
+}
+
+.notif-message:hover {
+    filter: brightness(80%);
+}
+
+.notif-message-alert {
+    background-color: #E53939;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.notif-message > .col-xs-9 {
+    margin-top: 8px;
+    color: white;
+}
+
+
+/* User */
+.dropdown-user-custom {
     background-color: #4F4F4F;
 }
 
-.dropdown-menu-custom > li > a {
-    color: lightgray;
+.dropdown-item {
+    padding: 10px;
+    color: white;
+    display: block;
 }
 
-.dropdown-menu-custom > li > a:hover,
-.dropdown-menu-custom > li > a:focus {
-    font-family: Raleway;
+.dropdown-item:hover {
     text-decoration: none;
-    color: lightgray;
-    background-color: gray;
-}
-
-
-/* For the icons */
-.search-icon {
-    max-width:20px;
-    max-height:20px;
-    width: auto;
-    height: auto;
-}
-
-.search-button:hover, .search-button:focus {
-    background-color: gray !important;
-}
-
-.member-icon {
-    max-width:20px;
-    max-height:20px;
-    width: auto;
-    height: auto;
+    color: white;
+    background-color: #444444;
 }
