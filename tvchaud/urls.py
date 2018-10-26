@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import url, include
 from django.views.generic.base import RedirectView
+from django.contrib.auth.views import LoginView
+
 import series.views as series
 from . import views
 
@@ -26,13 +28,11 @@ urlpatterns = [
 
     url(r'^admin/', admin.site.urls),
 
-    url(r'^login/', views.mylogin, name='login'),
+    url(r'^login/', LoginView.as_view(template_name='login.html'), name='login'),
     url(r'^logout/', views.mylogout, name='logout'),
-    # url(r'^register/', views.register, name='register'),
+    url(r'^register/', views.register, name='register'),
     url(r'^auth/', include('social_django.urls', namespace='social')),
 
     url(r'^series/', include('series.urls')),
     url(r'^user/', include('user.urls')),
 ]
-
-#bobby

@@ -4,19 +4,6 @@ conn = sqlite3.connect('tvchaud.db')
 
 cursor = conn.cursor()
 
-# Table : USER
-cursor.execute("""
-    CREATE TABLE user (
-        user_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-        first_name VARCHAR(255),
-        last_name VARCHAR(255),
-        email VARCHAR(255) NOT NULL,
-        password VARCHAR(255) NOT NULL,
-        insert_date DATETIME,
-        update_date DATETIME
-    );
-""")
-
 # Table : FAVORITE
 cursor.execute("""
     CREATE TABLE favorite (

@@ -1,5 +1,4 @@
 from django.shortcuts import render
-import requests
 from .APIClient import APIClient
 from django.contrib.auth.decorators import login_required
 
@@ -52,3 +51,4 @@ def test(request, tv_id):
 
     output = {'client': client, 'details': details, 'reviews': reviews, 'cast': cast, 'season_cast': season_cast}
     return render(request, 'series/test.html', output)
+
