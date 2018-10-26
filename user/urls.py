@@ -21,7 +21,6 @@ from . import views
 app_name = 'user'
 
 urlpatterns = [
-    url(r'^(?P<user_id>.+)', views.user_details, name='user_details'),
-    url(r'^my_favorites', views.my_favorites, name='my_favorites'),
+    url(r'^(?P<user_id>[0-9]+)/$', views.user_details, name='user_details'),
 
 ]
