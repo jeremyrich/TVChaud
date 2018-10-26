@@ -6,7 +6,7 @@ class ThreadFavorites(Thread):
 
     def __init__(self, favorite):
         Thread.__init__(self)
-        self.Favorite = favorite
+        self.favorite = favorite
 
     def run(self):
         self.favorite.get_favorite_details()
