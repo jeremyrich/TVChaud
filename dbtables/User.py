@@ -34,7 +34,8 @@ class User:
 
     def get_my_favorites(self):
         command = """SELECT * FROM favorite WHERE user_id=?"""
-        my_favorite = query(command, self.__user_id)
+        data = (self.__user_id,)
+        my_favorite = query(command, data)
         favorites = []
         for fav in my_favorite:
             favorites.append(Favorite(fav[1], fav[2]))
