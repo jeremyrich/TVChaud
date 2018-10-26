@@ -3,25 +3,20 @@
 {% load static %}
 
 {% block static %}
-    <link rel="stylesheet" type="text/css" href="{% static 'series/css/details.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'series/css/series_details.css' %}"/>
 {% endblock%}
 
 
 {% block content %}
 
-    <div class="col-xs-2 menu">
-        Menu à gauche<br/>
-        Acteurs<br/>
-        Reviews<br/>
-        D'autres trucs<br/>
-        D'autres trucs<br/>
-        D'autres trucs<br/>
-        D'autres trucs<br/>
-        D'autres trucs<br/>
-        D'autres trucs<br/>
-        D'autres trucs<br/>
-        D'autres trucs<br/>
-        D'autres trucs<br/>
+    <div class="col-xs-2 seasons">
+        {% for season in details.seasons %}
+            <div class="col-xs-12 season">
+                <a href="{{ season.id }}" class="cover-btn season">
+                    <img src="{{ season.poster_path }}" width=70px height=110px align="left"/> {{ season.name }} <br/>
+                    <span class="episode-number"> {{ season.episode_count }} </span> </a>
+            </div>
+        {% endfor %}
 
     </div>
 
@@ -97,14 +92,14 @@
     </div>
 
     <div class="col-xs-2 favorites">
-        <button type="submit" class="button" > <span style="font-size: 30px;"> + </span> <br/> Add to favorites</button>
+        <button type="submit" class="favorite-button" > <span style="font-size: 30px;"> + </span> <br/> Add to favorites</button>
     </div>
     <div class="col-xs-12 similar-movies">
         <div class="small-title">Similar TV shows</div>
 
         {% for sim in similar %}
             <div class="col-xs-1 similar-example">
-                <a href="{{ sim.id }}" class="cover-btn"><img src="{{ sim.poster_path }}" class="cover-btn"
+                <a href="{{ sim.id }}" class="cover-btn"><img src="{{ sim.poster_path }}"
                                                               height=100px width=70px /> {{ sim.name }}</a>
             </div>
         {% endfor %}

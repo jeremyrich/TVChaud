@@ -1,8 +1,21 @@
-.menu {
+.seasons {
     padding-top: 20px;
+    margin-left: 0px;
+
 }
 
-.button {
+.season {
+    padding-bottom: 10px;
+    text-align: center;
+    color: white;
+    line-height: 55px;
+}
+
+.episode-number {
+    font-size: 12px;
+}
+
+.favorite-button {
 	font-size: 16px;
 	background-color: #0096FF;
 	display: inline-block;
@@ -19,7 +32,7 @@
     margin-top: 10px;
 }
 
-.button:hover {
+.favorite-button:hover {
 	background-color: #4F4F4F;
 	color: #0096FF;
 	cursor: pointer;
@@ -48,12 +61,12 @@ img {
 
 .movie-description {
     padding-top: 10px;
-    padding-bottom: 30px;
+    padding-bottom: 15px;
     font-style: italic;
     text-align: justify;
 }
 
-.movie-infos {padding-bottom: 15px;}
+.movie-infos {padding-top: 15px;}
 
 .movie-actors {
     padding-bottom: 5px;
@@ -94,4 +107,5 @@ img {
 
 .cover-btn:hover {
     filter: brightness(80%);
+    color: lightgray;
 }
