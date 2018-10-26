@@ -1,4 +1,4 @@
-from .APIClient import APIClient
+from series.APIClient import APIClient
 
 class Favorite():
     def __init__(self, user_id, tv_id):
