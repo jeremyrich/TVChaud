@@ -4,30 +4,68 @@
 
 <nav class="navbar navbar-fixed-top navbar-custom">
 
+    <!-- Title -->
     <a class="navbar-brand hidden-sm" href="{% url 'home' %}"><span style="color: #0096FF;">TV</span>Chaud</a>
 
     <div class="container-fluid">
 
+        <!-- Buttons on the right -->
         <ul class="nav navbar-nav navbar-right">
+
+            <!-- Button Notifications -->
             <li>
-                <a class="search-button" href="#">
-                    <img class="search-icon" src="{% static 'icons/search.png' %}"/>
-                </a>
+                <div class="dropdown dropdown-btn-container">
+
+                    <!-- Le bouton Notif : red si il y a une notif non lue, transparent sinon -->
+                    {% if notifs.alert %}
+                        <a class="dropdown-toggle dropdown-btn notif-alert" id="notif-dropdown-button" data-toggle="dropdown">
+                            <img class="header-icon" src="{% static 'icons/ringbell_white.png' %}"/>
+                        </a>
+                    {% else %}
+                        <a class="dropdown-toggle dropdown-btn notif-no-alert" id="notif-dropdown-button" data-toggle="dropdown">
+                            <img class="header-icon" src="{% static 'icons/ringbell_white.png' %}"/>
+                        </a>
+                    {% endif %} 
+
+                    <!-- Dropdown pour les notifs-->
+                    <div class="dropdown-menu dropdown-notif-custom" aria-labelledby="notif-dropdown-button">
+                        <div class="dropdown-header-custom">New Episodes</div>
+                        {% for ep in notifs.new_episodes %}
+                            <div class="notif-container">
+                                <a class="notif-message {% if ep.seen %}notif-message-no-alert{% else %}notif-message-alert{% endif %}" href="{% url 'home' %}">
+                                    <div class="col-xs-3">
+                                        <img class="header-icon" src="{% static 'icons/ringbell_white.png' %}"/>
+                                    </div>
+                                    <div class="col-xs-9">
+                                        {{ ep.message }}
+                                    </div>
+                                </a>
+                            </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
             </li>
-            <li class="dropdown dropdown-custom">
-                <a class="dropdown-toggle toggle-custom" data-toggle="dropdown" href="#">
-                    <img class="member-icon" src="{% static 'icons/member.png' %}"/>
-                    {{ user.username }}
-                </a>
-                <ul class="dropdown-menu dropdown-menu-custom">
-                    <li>
-                        <a href="">Profile</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'logout' %}">Logout</a>
-                    </li>
-                </ul>
+
+            <!-- Button User -->
+            <li>
+                <div class="dropdown dropdown-btn-container">
+
+                    <!-- Le bouton User -->
+                    <a class="dropdown-toggle dropdown-btn" id="user-dropdown-button" data-toggle="dropdown">
+                        <img class="header-icon" src="{% static 'icons/member.png' %}">
+                        <span class="username-text">{{ user.username }}</span>
+                    </a>
+
+                    <!-- Dropdown pour User -->
+                    <div class="dropdown-menu dropdown-user-custom" aria-labelledby="user-dropdown-button">
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
+                    </div>
+
+                </div>
             </li>
+
         </ul>
 
     </div>
