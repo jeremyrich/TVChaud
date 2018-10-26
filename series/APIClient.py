@@ -51,6 +51,7 @@ class APIClient:
 
         details = self.call('GET', url)
 
+        details['id'] = 'http://localhost:8000/series/details/' + str(details['id'])
         real = []
         if details['created_by'] == []:
             real = ['not in the database']
@@ -73,8 +74,7 @@ class APIClient:
                                   'poster_path': "None"}
         else:
             for season in details['seasons']:
-                season['id'] = 'http://localhost:8000/series/details/' + str(details['id']) + "/" + \
-                               str(season['season_number'])
+                season['id'] = str(details['id']) + "/" + str(season['season_number'])
                 if season['poster_path'] == None:
                     season['poster_path'] = \
                         "https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png"
@@ -85,7 +85,8 @@ class APIClient:
                 else:
                     season['episode_count'] = str(season['episode_count']) + " episodes"
 
-        details_useful = {'realisateur': realisateur,
+        details_useful = {'link': details['id'],
+                          'realisateur': realisateur,
                           'genres': genre,
                           'name': details['name'],
                           'number_of_episodes': details['number_of_episodes'],
@@ -174,6 +175,18 @@ class APIClient:
             if episode['overview'] == "":
                 episode['overview'] = "There's currently no description for this episode. It's probably " \
                                       "not one of the best..."
+
+            episode['vote_average'] = round(episode['vote_average'], 1)
+
+            stars = []
+            if episode['guest_stars'] != []:
+
+                for actor in episode['guest_stars']:
+                    actor['profile_path'] = 'https://image.tmdb.org/t/p/w200' + str(actor['profile_path'])
+                    stars.append(actor['name'])
+                stars = ', '.join(stars)
+
+            episode['stars'] = stars
 
 
         return details

@@ -48,3 +48,4 @@ class User:
         command = """INSERT INTO friend_request(from_user, to_user, message) VALUES(?, ?, ?)"""
         data = (self.__user_id, to_user, text)
         query(command, data)
+

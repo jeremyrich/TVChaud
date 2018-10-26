@@ -10,6 +10,10 @@
 {% block content %}
 
     <div class="col-xs-2 seasons">
+        <div class="col-xs-12 small-title">
+            <a href="{{ show_details.link }}">{{ show_details.name }}<a/>
+        </div>
+
         {% for season in show_details.seasons %}
             <div class="col-xs-12 season">
                 <a href="{{ season.id }}" class="cover-btn season">
@@ -67,16 +71,31 @@
             <div class="col-xs-12 single_episode">
 
                 <div class="small-title"> {{ episode.name }}</div>
+                <div class="col-xs-7 movie-description"> {{ episode.overview }}</div>
                 <div class="col-xs-5 movie-infos">
                     <b>Average user rating : </b>{{ episode.vote_average }} / 10 <br/>
                     <b>Air date : </b>{{ episode.air_date }} <br/>
                 </div>
-                <div class="col-xs-7 movie-description"> {{ episode.overview }}</div>
+
+                {% if episode.guest_stars|length > 0 %}
+                    <div class="col-xs-12 guest-stars">
+                        <span style="font-size: 16px; color: lightgray"><b>
+                            Guest Star{% if episode.guest_stars|length > 1 %}s{% endif %}:</b></span>
+                        {{ episode.stars }}
+
+                    </div>
+
+                {% endif %}
 
             </div>
         {% endfor %}
 
         </div>
+    </div>
+
+    <div class="col-xs-2 favorites">
+        <button type="submit" class="favorite-button" > <span style="font-size: 30px;"> + </span> <br/>
+            Add show to favorites</button>
     </div>
 
 
