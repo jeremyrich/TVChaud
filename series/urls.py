@@ -24,7 +24,8 @@ app_name = 'series'
 urlpatterns = [
     url(r'^$', RedirectView.as_view(url='home'),  name='home'),
     url(r'^home', views.home, name='home'),
-    url(r'^details/(?P<tv_id>.+)', views.details, name='details'),
+    url(r'^details/(?P<tv_id>[0-9]+)/$', views.series_details, name='details'),
+    url(r'^details/(?P<tv_id>[0-9]+)/(?P<season_number>[0-9]+)/$', views.season_details, name='season_details'),
     url(r'^test/(?P<tv_id>.+)', views.test, name='test'),
 
 ]

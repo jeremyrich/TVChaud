@@ -1,0 +1,60 @@
+.seasons {
+    padding-top: 20px;
+    margin-left: 0px;
+
+}
+
+.season {
+    padding-bottom: 10px;
+    text-align: center;
+    color: white;
+    line-height: 55px;
+}
+
+.episode-number {
+    font-size: 12px;
+}
+
+.movies {
+    background-color: #4F4F4F;
+    padding-left: 10px;
+    border-radius: 4px;
+    padding-bottom: 20px;
+}
+
+img {
+    margin: 5px;
+}
+
+.title {
+    color: #0096FF;
+    font-size: 36px;
+    text-align: left;
+    vertical-align: top;
+    font-weight: bold;
+    padding-bottom: 5px;
+    padding-top: 10px
+}
+
+.movie-description {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    font-style: italic;
+    text-align: justify;
+}
+
+.single_episode {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.small-title {
+    font-size: 20px;
+    font-weight: bold;
+    padding-bottom: 5px;
+}
+
+.movie-infos {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}

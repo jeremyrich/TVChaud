@@ -50,9 +50,10 @@ class APIClient:
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id)
 
         details = self.call('GET', url)
+
         real = []
         if details['created_by'] == []:
-            real = ['non renseigné']
+            real = ['not in the database']
         else:
             for realisateur in details['created_by']:
                 real.append(realisateur['name'])
@@ -67,6 +68,23 @@ class APIClient:
                 genres.append(g['name'])
         genre = ', '.join(genres)
 
+        if details['seasons'] == []:
+            details['seasons'] = {'name': "This TV show doesn't have any seasons yet. It'll come soon ;)",
+                                  'poster_path': "None"}
+        else:
+            for season in details['seasons']:
+                season['id'] = 'http://localhost:8000/series/details/' + str(details['id']) + "/" + \
+                               str(season['season_number'])
+                if season['poster_path'] == None:
+                    season['poster_path'] = \
+                        "https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png"
+                else:
+                    season['poster_path'] = 'https://image.tmdb.org/t/p/w500' + season['poster_path']
+                if season['episode_count'] == 1:
+                    season['episode_count'] = "1 episode"
+                else:
+                    season['episode_count'] = str(season['episode_count']) + " episodes"
+
         details_useful = {'realisateur': realisateur,
                           'genres': genre,
                           'name': details['name'],
@@ -79,6 +97,7 @@ class APIClient:
                           'first_air_date': details['first_air_date'],
                           'next_episode_to_air': details['next_episode_to_air'],
                           'vote_average': details['vote_average'],
+                          'seasons': details['seasons'],
                           }
 
         return details_useful
@@ -127,3 +146,34 @@ class APIClient:
                 result['id'] = 'http://localhost:8000/series/details/' + str(result['id'])
 
             return similar['results'][:12]
+
+    def get_season_details(self, tv_id, season_number):
+        url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/season/' + str(season_number)
+
+        details = self.call('GET', url)
+
+        url = 'https://api.themoviedb.org/3/tv/' + str(tv_id)
+
+        show_details = self.call('GET', url)
+
+        if details['season_number'] == 0:
+            details['season_number'] = "Specials"
+        else:
+            details['season_number'] = "Season " + str(details['season_number'])
+
+        if details['poster_path'] is None:
+            details['poster_path'] = 'https://image.tmdb.org/t/p/w500' + show_details['poster_path']
+        else:
+            details['poster_path'] = 'https://image.tmdb.org/t/p/w500' + details['poster_path']
+
+        details['number_of_episodes'] = len(details['episodes'])
+
+        for episode in details['episodes']:
+            episode['name'] = "Episode " + str(episode['episode_number']) + " - " + episode['name']
+
+            if episode['overview'] == "":
+                episode['overview'] = "There's currently no description for this episode. It's probably " \
+                                      "not one of the best..."
+
+
+        return details

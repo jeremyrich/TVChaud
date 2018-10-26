@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'series/css/season_details.css' %}"/>
+{% endblock%}
+
+
+{% block content %}
+
+    <div class="col-xs-2 seasons">
+        {% for season in show_details.seasons %}
+            <div class="col-xs-12 season">
+                <a href="{{ season.id }}" class="cover-btn season">
+                    <img src="{{ season.poster_path }}" width=70px height=110px align="left"/> {{ season.name }} <br/>
+                    <span class="episode-number"> {{ season.episode_count }} </span> </a>
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="col-xs-8 movies">
+
+        <div class="col-xs-12 title">
+            {{ show_details.name }} - {{ season_details.season_number }}
+        </div>
+
+        <div class="col-xs-4 movie-image">
+                <img src="{{ season_details.poster_path }}" width=100% />
+        </div>
+
+        <div class="col-xs-8">
+
+            <div class="movie-description">
+                {{ season_details.overview }}
+            </div>
+
+            <div class="movie-infos">
+                <b>Average show rating : </b>{{ show_details.vote_average }} / 10 <br/>
+            </div>
+
+            <div class="movie-infos">
+                <b>Number of episodes : </b>{{ season_details.number_of_episodes }} <br/>
+           </div>
+
+            <div class="movie-infos">
+                <b>Genres : </b> {{ show_details.genres }} <br/>
+            </div>
+
+            <div class="movie-infos">
+                <b>First air date : </b>{{ season_details.air_date }} <br/>
+            </div>
+
+            <div class="movie-infos">
+                <b>Director : </b> {{ show_details.realisateur }} <br/>
+            </div>
+
+            <div class="movie-infos">
+                <b>Country of origin : </b> {{ show_details.origin_country }} <br/>
+            </div>
+        </div>
+
+        <div class="col-xs-12 episodes">
+
+        {% for episode in season_details.episodes %}
+            <div class="col-xs-12 single_episode">
+
+                <div class="small-title"> {{ episode.name }}</div>
+                <div class="col-xs-5 movie-infos">
+                    <b>Average user rating : </b>{{ episode.vote_average }} / 10 <br/>
+                    <b>Air date : </b>{{ episode.air_date }} <br/>
+                </div>
+                <div class="col-xs-7 movie-description"> {{ episode.overview }}</div>
+
+            </div>
+        {% endfor %}
+
+        </div>
+    </div>
+
+
+{% endblock %}

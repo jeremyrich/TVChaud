@@ -17,7 +17,7 @@ def home(request):
 
 
 @login_required
-def details(request, tv_id):
+def series_details(request, tv_id):
 
     client = APIClient()
     details = client.get_tv_show_details(tv_id)
@@ -28,7 +28,18 @@ def details(request, tv_id):
 
     output = {'client': client, 'details': details, 'reviews': reviews, 'cast': cast, 'season_cast': season_cast,
               'similar': similar}
-    return render(request, 'series/details.html', output)
+    return render(request, 'series/series_details.html', output)
+
+@login_required
+def season_details(request, tv_id, season_number):
+
+    client = APIClient()
+
+    season_details = client.get_season_details(tv_id, season_number)
+    show_details = client.get_tv_show_details(tv_id)
+
+    output = {'season_details': season_details, 'show_details': show_details}
+    return render(request, 'series/season_details.html', output)
 
 @login_required
 def test(request, tv_id):
