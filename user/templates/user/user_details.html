@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'user/css/details.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+     <div class="col-xs-2 menu">
+            <b>User name :</b><br/>
+            {{user.username}}<br/>
+            <b>Number of favorite tv shows :</b><br/>
+            {{details|length}}<br/>
+
+     </div>
+
+    <div class="col-xs-8 favorites">
+        <div class="big-title"> Favorites</div>
+
+        {% for favorite in details %}
+            <div class="col-xs-12 unique_favorite">
+                <div class="col-xs-12 title">
+                    <a href="{{ favorite.link }}"><b>{{ favorite.name }}</b></a>
+                </div>
+
+
+
+                <div class="col-xs-4 movie-image">
+                    <a href="{{ favorite.link }}"><img src="{{ favorite.poster }}" width=80% /></a>
+                </div>
+
+                <div class="col-xs-8">
+
+                    <div class="movie-description">
+                        <b>Rating:</b> {{ favorite.vote_average }} / 10
+                    </div>
+
+                    <div class="movie-description">
+                        <b>Overview:</b><br/>
+                        <span style="font-style: italic">{{ favorite.overview }}</span>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        {% endfor %}
+    </div>
+      <!-- <div class="col-xs-12 user-name">
+            User {{ user_id }}: Hervé Biausser
+        </div>
+
+        <div class="col-xs-4 user-image">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Herv%C3%A9_Biausser%2C_directeur_Ecole_Centrale_Paris.jpg/260px-Herv%C3%A9_Biausser%2C_directeur_Ecole_Centrale_Paris.jpg"
+                     width=100% />
+        </div>
+
+
+            <div class="col-xs-8 user-id">
+                <b>User ID: </b> {{ user_id }}
+            </div>
+-->
+
+
+
+
+{% endblock %}

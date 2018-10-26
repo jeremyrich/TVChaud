@@ -15,4 +15,4 @@ def user_details(request, user_id):
               'user': user,
               'details': favorites_details}
 
-    return render(request, 'user/details.html', output)
+    return render(request, 'user/user_details.html', output)

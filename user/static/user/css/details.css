@@ -2,12 +2,13 @@
     padding-top: 20px;
 }
 
-.users {
+.unique_favorite {
     background-color: #4F4F4F;
     padding-left: 10px;
     border-radius: 4px;
     padding-bottom: 20px;
     margin-top: 10px;
+    padding-top: 10px;
 }
 
 img {
@@ -26,5 +27,27 @@ img {
 
 .favorites {
     padding-top: 20px;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0096FF;
+}
+
+.big-title {
+    color: white;
+    font-size: 36px;
+    text-align: left;
+    vertical-align: top;
+    font-weight: bold;
+    padding-bottom: 5px;
+    padding-top: 10px
+}
+
+a:hover {color: lightgray;}
+
+.movie-image:hover {
+    filter: brightness(70%);
 }
 
