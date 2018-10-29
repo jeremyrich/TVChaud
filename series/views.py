@@ -1,6 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .APIClient import APIClient
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
+
+from user.user_notifs import load_notifications
+
+from dbtables.Notification import Notification
 
 
 # Create your views here.
@@ -11,9 +16,9 @@ def home(request):
     client = APIClient()
     movies = client.get_popular_shows()
 
-    output = {'movies': movies}
+    notifs = load_notifications(request)
 
-    return render(request, 'series/home.html', output)
+    return render(request, 'series/home.html', locals())
 
 
 @login_required
@@ -26,9 +31,9 @@ def series_details(request, tv_id):
     season_cast = client.get_tv_show_season_cast(tv_id)
     similar = client.get_tv_shows_similar(tv_id)
 
-    output = {'client': client, 'details': details, 'reviews': reviews, 'cast': cast, 'season_cast': season_cast,
-              'similar': similar}
-    return render(request, 'series/series_details.html', output)
+    notifs = load_notifications(request)
+
+    return render(request, 'series/series_details.html', locals())
 
 @login_required
 def season_details(request, tv_id, season_number):
@@ -38,17 +43,33 @@ def season_details(request, tv_id, season_number):
     season_details = client.get_season_details(tv_id, season_number)
     show_details = client.get_tv_show_details(tv_id)
 
-    output = {'season_details': season_details, 'show_details': show_details}
-    return render(request, 'series/season_details.html', output)
+    notifs = load_notifications(request)
+
+    return render(request, 'series/season_details.html', locals())
 
 @login_required
 def test(request, tv_id):
+    
     client = APIClient()
     details = client.get_tv_show_details(tv_id)
     reviews = client.get_tv_shows_reviews(tv_id)
     cast = client.get_tv_show_cast(tv_id)
     season_cast = client.get_tv_show_season_cast(tv_id)
 
-    output = {'client': client, 'details': details, 'reviews': reviews, 'cast': cast, 'season_cast': season_cast}
-    return render(request, 'series/test.html', output)
+    notifs = load_notifications(request)
 
+    return render(request, 'series/test.html', locals())
+
+
+@login_required
+def ajax_see_notif(request):
+    notif_id = request.GET.get('notif_id', None)
+    Notification.check_as_seen(notif_id)
+    return JsonResponse({'notif_id': notif_id})
+
+
+@login_required
+def ajax_check_notif(request):
+    notif_id = request.GET.get('notif_id', None)
+    Notification.check_seen_unseen(notif_id)
+    return JsonResponse({'notif_id': notif_id})

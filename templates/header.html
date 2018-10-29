@@ -1,6 +1,7 @@
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/header.css' %}"/>
+<script src="{% static 'js/header.js' %}"></script>
 
 <nav class="navbar navbar-fixed-top navbar-custom">
 
@@ -14,7 +15,7 @@
 
             <!-- Button Notifications -->
             <li>
-                <div class="dropdown dropdown-btn-container">
+                <div class="dropdown dropdown-btn-container" id="button-notif-container">
 
                     <!-- Le bouton Notif : red si il y a une notif non lue, transparent sinon -->
                     {% if notifs.alert %}
@@ -32,14 +33,21 @@
                         <div class="dropdown-header-custom">New Episodes</div>
                         {% for ep in notifs.new_episodes %}
                             <div class="notif-container">
-                                <a class="notif-message {% if ep.seen %}notif-message-no-alert{% else %}notif-message-alert{% endif %}" href="{% url 'home' %}">
-                                    <div class="col-xs-3">
-                                        <img class="header-icon" src="{% static 'icons/ringbell_white.png' %}"/>
-                                    </div>
-                                    <div class="col-xs-9">
-                                        {{ ep.message }}
-                                    </div>
-                                </a>
+                                <div class="notif-message {% if ep.seen %}notif-message-no-alert{% else %}notif-message-alert{% endif %}" id="notif-{{ ep.notif_id }}">
+                                    <a class="notif-message-link col-xs-11" onclick="see_notif({{ ep.notif_id }})" href="{% url 'series:season_details' ep.tv_id ep.season %}">
+                                        <div class="col-xs-2">
+                                            <img class="notif-image" src="{{ ep.image }}"/>
+                                        </div>
+                                        <div class="col-xs-10">
+                                            New episode : <b>{{ ep.title }}</b> - <b>Season {{ ep.season }}</b> - <b>Episode {{ ep.episode }}</b>
+                                        </div>
+                                    </a>
+                                    <a class="eye-button col-xs-1" onclick="check_notif({{ ep.notif_id }})">
+                                        <div>
+                                            <img class="eye-image" src="{% static 'icons/eye.png' %}"/>
+                                        </div>
+                                    </a>
+                                </div>
                             </div>
                         {% endfor %}
                     </div>

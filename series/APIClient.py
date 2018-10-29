@@ -75,7 +75,7 @@ class APIClient:
         else:
             for season in details['seasons']:
                 season['id'] = str(details['id']) + "/" + str(season['season_number'])
-                if season['poster_path'] == None:
+                if season['poster_path'] is None:
                     season['poster_path'] = \
                         "https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png"
                 else:

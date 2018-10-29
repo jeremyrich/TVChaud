@@ -21,14 +21,16 @@ def get_user_favorites(favorites):
     favorite_test = Favorite(1, 1402)
     favorite_test_2 = Favorite(1, 60735)
     favorite_test_bobby = Favorite(2, 1418)
-    Threads = []
+    threads = []
+
     for favorite in favorites:
-        Threads.append(ThreadFavorites(favorite))
+        threads.append(ThreadFavorites(favorite))
     for k in range(0, len(favorites)):
-        Threads[k].start()
-    for l in range(0, len(Threads)):
-        Threads[l].join()
-    Threads.append(favorite_test.get_favorite_details())
-    Threads.append(favorite_test_2.get_favorite_details())
-    Threads.append(favorite_test_bobby.get_favorite_details())
-    return Threads
+        threads[k].start()
+    for l in range(0, len(threads)):
+        threads[l].join()
+        
+    threads.append(favorite_test.get_favorite_details())
+    threads.append(favorite_test_2.get_favorite_details())
+    threads.append(favorite_test_bobby.get_favorite_details())
+    return threads
