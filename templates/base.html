@@ -9,6 +9,8 @@
         <script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
         <script src="{% static 'js/bootstrap.js' %}"></script>
         <title>{% block title %}TV Chaud{% endblock %}</title>
+        {% block static %}{% endblock %}
+        {% block javascript %}{% endblock %}
     </head>
 
     {% block body %}
@@ -22,8 +24,5 @@
             </div>
         </body>
     {% endblock %}
-
-    {% block static %}{% endblock %}
-    {% block javascript %}{% endblock %}
 
 </html>

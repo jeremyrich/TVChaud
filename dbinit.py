@@ -9,8 +9,7 @@ cursor.execute("""
     CREATE TABLE favorite (
         favorite_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
         user_id INTEGER,
-        tv_id INTEGER,
-        insert_date DATETIME
+        tv_id INTEGER
     )
 """)
 
@@ -19,8 +18,7 @@ cursor.execute("""
     CREATE TABLE friendship (
         friendship_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
         user_id_1 INTEGER,
-        user_id_2 INTEGER,
-        insert_date DATETIME
+        user_id_2 INTEGER
     )
 """)
 
@@ -31,23 +29,20 @@ cursor.execute("""
         from_user INTEGER,
         to_user INTEGER,
         message TEXT,
-        insert_date DATETIME
+        seen TINYINT(1)
     )
 """)
 
-# Table : NOTIFICATION_TYPE
+# Table : EPISODE_SEEN
+# table pour stocker les épisodes déjà vus par un user (utilisé seulement pour ses favoris), permet de créer des notifications à la sortie d'un nouvel épisode
 cursor.execute("""
-    CREATE TABLE notification_type (
-        notification_type_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-        name VARCHAR(85),
-        insert_date DATETIME,
-        update_date DATETIME
+    CREATE TABLE episode_seen (
+        episode_seen_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+        user_id INTEGER,
+        tv_id INTEGER,
+        season INTEGER,
+        episode INTEGER
     )
-""")
-cursor.execute("""
-    INSERT INTO notification_type(name, insert_date, update_date) VALUES
-    ('New episode', DATETIME(), DATETIME()),
-    ('Friend Request', DATETIME(), DATETIME())
 """)
 
 # Table : NOTIFICATION
@@ -55,12 +50,18 @@ cursor.execute("""
     CREATE TABLE notification (
         notification_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
         user_id INTEGER,
-        message TEXT,
-        notification_type_id INTEGER,
-        seen TINYINT(1),
-        insert_date DATETIME,
-        update_date DATETIME
+        tv_id INTEGER,
+        season INTEGER,
+        episode INTEGER,
+        seen TINYINT(1)
     )
+""")
+
+# insert into notification for example
+cursor.execute("""
+    INSERT INTO notification(user_id, tv_id, season, episode, seen) VALUES
+    (1, 60735, 5, 4, 0),
+    (1, 1402, 9, 8, 1)
 """)
 
 

@@ -28,4 +28,7 @@ urlpatterns = [
     url(r'^details/(?P<tv_id>[0-9]+)/(?P<season_number>[0-9]+)/$', views.season_details, name='season_details'),
     url(r'^test/(?P<tv_id>.+)', views.test, name='test'),
 
+    # ajax calls
+    url(r'^ajax/see_notif/$', views.ajax_see_notif, name='ajax_see_notif'),
+    url(r'^ajax/check_notif/$', views.ajax_check_notif, name='ajax_check_notif'),
 ]
