@@ -26,39 +26,25 @@ def series_details(request, tv_id):
 
     client = APIClient()
     details = client.get_tv_show_details(tv_id)
-    reviews = client.get_tv_shows_reviews(tv_id)
     cast = client.get_tv_show_cast(tv_id)
-    season_cast = client.get_tv_show_season_cast(tv_id)
+    reviews = client.get_tv_shows_reviews(tv_id)
     similar = client.get_tv_shows_similar(tv_id)
 
     notifs = load_notifications(request)
 
     return render(request, 'series/series_details.html', locals())
 
+
 @login_required
 def season_details(request, tv_id, season_number):
 
     client = APIClient()
-
-    season_details = client.get_season_details(tv_id, season_number)
     show_details = client.get_tv_show_details(tv_id)
+    season_details = client.get_season_details(tv_id, season_number)
 
     notifs = load_notifications(request)
 
     return render(request, 'series/season_details.html', locals())
-
-@login_required
-def test(request, tv_id):
-    
-    client = APIClient()
-    details = client.get_tv_show_details(tv_id)
-    reviews = client.get_tv_shows_reviews(tv_id)
-    cast = client.get_tv_show_cast(tv_id)
-    season_cast = client.get_tv_show_season_cast(tv_id)
-
-    notifs = load_notifications(request)
-
-    return render(request, 'series/test.html', locals())
 
 
 @login_required

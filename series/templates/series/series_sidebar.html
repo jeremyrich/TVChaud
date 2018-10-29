@@ -1,0 +1,10 @@
+<a class="small-title" href="{% url 'series:details' object.tv_id %}">{{ object.name }}</a>
+
+{% for season in object.seasons %}
+    <div class="col-xs-12 season">
+        <a href="{% url 'series:season_details' object.tv_id season.season_number %}" class="cover-btn season">
+            <img src="{{ season.poster_path }}" width=70px height=110px align="left"/>{{ season.season_name }}<br/>
+            <span class="episode-number">{{ season.episode_count }}</span>
+        </a>
+    </div>
+{% endfor %}
