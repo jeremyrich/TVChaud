@@ -9,22 +9,12 @@
 
 {% block content %}
 
+    <!-- Side bar with seasons -->
     <div class="col-xs-2 seasons">
-
-        <div class="col-xs-12 small-title">
-            <a href="{{ show_details.link }}">{{ show_details.name }}<a/>
-        </div>
-
-        {% for season in details.seasons %}
-            <div class="col-xs-12 season">
-                <a href="{{ season.id }}" class="cover-btn season">
-                    <img src="{{ season.poster_path }}" width=70px height=110px align="left"/> {{ season.name }} <br/>
-                    <span class="episode-number"> {{ season.episode_count }} </span> </a>
-            </div>
-        {% endfor %}
-
+        {% include 'series/series_sidebar.html' with object=details %}
     </div>
 
+    <!-- Show details -->
     <div class="col-xs-8 movies">
 
         <div class="col-xs-12 title">
@@ -70,7 +60,7 @@
         <div class="col-xs-12 movie-actors">
             <div class="small-title">Actors: </div>
 
-            {% for actor in cast.actors %}
+            {% for actor in cast %}
                 <div class="row">
                     <div class=" col-xs-1 actor-picture">
                         <img src="{{ actor.profile_path }}" height=70px/>
@@ -96,16 +86,18 @@
 
     </div>
 
+    <!-- Add to Favorites button -->
     <div class="col-xs-2 favorites">
         <button type="submit" class="favorite-button" > <span style="font-size: 30px;"> + </span> <br/> Add to favorites</button>
     </div>
+
+    <!-- Similar shows at the bottom of the page -->
     <div class="col-xs-12 similar-movies">
         <div class="small-title">Similar TV shows</div>
 
         {% for sim in similar %}
             <div class="col-xs-1 similar-example">
-                <a href="{{ sim.id }}" class="cover-btn"><img src="{{ sim.poster_path }}"
-                                                              height=100px width=70px /> {{ sim.name }}</a>
+                <a href="{% url 'series:details' sim.id %}" class="cover-btn"><img src="{{ sim.poster_path }}" height=100px width=70px /> {{ sim.name }}</a>
             </div>
         {% endfor %}
 

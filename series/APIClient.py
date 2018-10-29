@@ -26,7 +26,7 @@ class APIClient:
     def __init__(self):
         self.api_key = settings.TMDB_API_KEY
 
-
+    # Fonction d'appel de l'API TheMovieDB : elle permet de rajouter l'API Key à la suite de l'url et de lancer la requête
     def call(self, method, url, *args):
         
         if method == 'GET':
@@ -36,58 +36,42 @@ class APIClient:
         return response.json()
 
 
+    # API Call : Retourne les 20 TV shows les plus populaires
     def get_popular_shows(self):
         url = 'https://api.themoviedb.org/3/tv/popular'
-
         result = self.call('GET', url)
-        popular = result['results']
-        for movie in popular:
-            movie['id'] = 'http://localhost:8000/series/details/' + str(movie['id'])
-            movie['poster_path'] = 'https://image.tmdb.org/t/p/w500' + movie['poster_path']
+
+        popular = []
+
+        for resu in result['results']:
+            tvshow = {'tv_id': resu['id'], 'poster_path': 'https://image.tmdb.org/t/p/w500' + resu['poster_path']}
+            popular.append(tvshow)
+
         return popular
 
+
+    # API Call : Retourne la fiche détail d'un TV show en particulier
     def get_tv_show_details(self, tv_id):
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id)
-
         details = self.call('GET', url)
 
-        details['id'] = 'http://localhost:8000/series/details/' + str(details['id'])
-        real = []
-        if details['created_by'] == []:
-            real = ['not in the database']
-        else:
-            for realisateur in details['created_by']:
-                real.append(realisateur['name'])
-        realisateur = ', '.join(real)
+        realisateurs = 'Unknown' if len(details['created_by']) == 0 else ', '.join([real['name'] for real in details['created_by']])
+        genres = 'Not identified' if len(details['genres']) == 0 else ', '.join([g['name'] for g in details['genres']])
 
+        show_seasons = []
 
-        genres = []
-        if details['genres'] == []:
-            genres = ['Not identified']
-        else:
-            for g in details['genres']:
-                genres.append(g['name'])
-        genre = ', '.join(genres)
+        for se in details['seasons']:
 
-        if details['seasons'] == []:
-            details['seasons'] = {'name': "This TV show doesn't have any seasons yet. It'll come soon ;)",
-                                  'poster_path': "None"}
-        else:
-            for season in details['seasons']:
-                season['id'] = str(details['id']) + "/" + str(season['season_number'])
-                if season['poster_path'] is None:
-                    season['poster_path'] = \
-                        "https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png"
-                else:
-                    season['poster_path'] = 'https://image.tmdb.org/t/p/w500' + season['poster_path']
-                if season['episode_count'] == 1:
-                    season['episode_count'] = "1 episode"
-                else:
-                    season['episode_count'] = str(season['episode_count']) + " episodes"
+            image = 'https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png' if se['poster_path'] is None else 'https://image.tmdb.org/t/p/w500' + se['poster_path']
 
-        details_useful = {'link': details['id'],
-                          'realisateur': realisateur,
-                          'genres': genre,
+            episode_count = '1 episode' if se['episode_count'] == 1 else str(se['episode_count']) + ' episodes'
+
+            season = {'season_name': se['name'], 'season_number': se['season_number'], 'poster_path': image, 'episode_count': episode_count}
+            show_seasons.append(season)
+
+        details_useful = {'tv_id' : details['id'],
+                          'realisateur': realisateurs,
+                          'genres': genres,
                           'name': details['name'],
                           'number_of_episodes': details['number_of_episodes'],
                           'origin_country': details['origin_country'][0],
@@ -98,95 +82,70 @@ class APIClient:
                           'first_air_date': details['first_air_date'],
                           'next_episode_to_air': details['next_episode_to_air'],
                           'vote_average': details['vote_average'],
-                          'seasons': details['seasons'],
-                          }
+                          'seasons': show_seasons}
 
         return details_useful
 
-    def get_tv_show_season_cast(self, tv_id, season_number = 1):
-        url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/season/' +str(season_number) +'/credits'
 
-        details = self.call('GET', url)
-        actors = details['cast']
-        crew = details['crew']
-        cast = {'actors': actors, 'crew': crew}
-        for actor in cast['actors']:
-            actor['profile_path'] = 'https://image.tmdb.org/t/p/w200' + str(actor['profile_path'])
-        return cast
-
+    # API Call : Retourne le casting du TV show en argument
     def get_tv_show_cast(self, tv_id):
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/credits'
+        credits = self.call('GET', url)
 
-        details = self.call('GET', url)
-        actors = details['cast']
-        crew = details['crew']
-        cast = {'actors': actors, 'crew': crew}
-        for actor in cast['actors']:
+        for actor in credits['cast']:
             actor['profile_path'] = 'https://image.tmdb.org/t/p/w200' + str(actor['profile_path'])
-        return cast
 
+        return credits['cast']
+
+
+    # API Call : Retourne les reviews du TV show en argument
     def get_tv_shows_reviews(self, tv_id):
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/reviews'
-
         reviews = self.call('GET', url)
+
         if reviews['results'] == []:
-            return [{'author': "", 'content': "Sorry, this TV show doesn't have any reviews yet. It's not bad though."}]
-        else:
-            return reviews['results'] # return a list of reviews contained in dictionaries
+            return [{'author': '', 'content': "Sorry, this TV show doesn't have any reviews yet. It's not bad though."}]
+        return reviews['results']
 
 
+    # API Call : Retourne les recommandations de shows similaires
     def get_tv_shows_similar(self, tv_id):
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/similar'
-
         similar = self.call('GET', url)
+
         if similar['results'] == []:
-            return [{'name': "No similar movies"}]
-        else:
-            for result in similar['results']:
-                result['poster_path'] = 'https://image.tmdb.org/t/p/w500' + result['poster_path']
-                result['id'] = 'http://localhost:8000/series/details/' + str(result['id'])
+            return [{'name': 'No similar movies'}]
 
-            return similar['results'][:12]
+        for result in similar['results']:
+            result['poster_path'] = 'https://image.tmdb.org/t/p/w500' + result['poster_path']
 
+        return similar['results'][:12]
+
+
+    # API Call : Retourne les détails de la saison d'un TV show donnés en argument
     def get_season_details(self, tv_id, season_number):
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/season/' + str(season_number)
+        season_details = self.call('GET', url)
 
-        details = self.call('GET', url)
+        image = 'https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png' if season_details['poster_path'] is None else 'https://image.tmdb.org/t/p/w500' + season_details['poster_path']
 
-        url = 'https://api.themoviedb.org/3/tv/' + str(tv_id)
+        episodes = []
+        for ep in season_details['episodes']:
+            name = 'Episode ' + str(ep['episode_number']) + ' - ' + ep['name']
 
-        show_details = self.call('GET', url)
+            overview = "There's currently no description for this episode. It's probably not one of the best..." if ep['overview'] == '' else ep['overview']
+            vote_average = round(ep['vote_average'], 1)
 
-        if details['season_number'] == 0:
-            details['season_number'] = "Specials"
-        else:
-            details['season_number'] = "Season " + str(details['season_number'])
+            stars = 'None' if len(ep['guest_stars']) == 0 else ', '.join([actor['name'] for actor in ep['guest_stars']])
+    
+            episode = {'name': name, 'overview': overview, 'vote_average': vote_average, 'stars': stars, 'air_date': ep['air_date']}
+            episodes.append(episode)
 
-        if details['poster_path'] is None:
-            details['poster_path'] = 'https://image.tmdb.org/t/p/w500' + show_details['poster_path']
-        else:
-            details['poster_path'] = 'https://image.tmdb.org/t/p/w500' + details['poster_path']
+        output = {'season_name': season_details['name'],
+                'poster_path': image,
+                'overview': season_details['overview'],
+                'air_date': season_details['air_date'],
+                'number_of_episodes': len(season_details['episodes']),
+                'episodes': episodes}
 
-        details['number_of_episodes'] = len(details['episodes'])
-
-        for episode in details['episodes']:
-            episode['name'] = "Episode " + str(episode['episode_number']) + " - " + episode['name']
-
-            if episode['overview'] == "":
-                episode['overview'] = "There's currently no description for this episode. It's probably " \
-                                      "not one of the best..."
-
-            episode['vote_average'] = round(episode['vote_average'], 1)
-
-            stars = []
-            if episode['guest_stars'] != []:
-
-                for actor in episode['guest_stars']:
-                    actor['profile_path'] = 'https://image.tmdb.org/t/p/w200' + str(actor['profile_path'])
-                    stars.append(actor['name'])
-                stars = ', '.join(stars)
-
-            episode['stars'] = stars
-
-
-        return details
+        return output

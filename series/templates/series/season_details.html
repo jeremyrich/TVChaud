@@ -10,24 +10,13 @@
 {% block content %}
 
     <div class="col-xs-2 seasons">
-        <div class="col-xs-12 small-title">
-            <a href="{{ show_details.link }}">{{ show_details.name }}<a/>
-        </div>
-
-        {% for season in show_details.seasons %}
-            <div class="col-xs-12 season">
-                <a href="{{ season.id }}" class="cover-btn season">
-                    <img src="{{ season.poster_path }}" width=70px height=110px align="left"/> {{ season.name }} <br/>
-                    <span class="episode-number"> {{ season.episode_count }} </span> </a>
-            </div>
-        {% endfor %}
-
+        {% include 'series/series_sidebar.html' with object=show_details %}
     </div>
 
     <div class="col-xs-8 movies">
 
         <div class="col-xs-12 title">
-            {{ show_details.name }} - {{ season_details.season_number }}
+            {{ show_details.name }} - {{ season_details.season_name }}
         </div>
 
         <div class="col-xs-4 movie-image">
