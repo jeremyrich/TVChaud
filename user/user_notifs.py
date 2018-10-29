@@ -9,11 +9,13 @@ class NotifThread(Thread):
     def __init__(self, notif):
         Thread.__init__(self)
         self.notif = notif
+        self.details = {'image': None, 'title': None}
 
     def run(self):
          client = APIClient()
          show_details = client.get_tv_show_details(self.notif.tv_id)
-         self.details = {'image': show_details['poster'], 'title': show_details['name']}
+         self.details['image'] = show_details['poster']
+         self.details['title'] = show_details['name']
 
 
 def load_notifications(request):
