@@ -15,7 +15,13 @@ img {
     margin: 5px;
 }
 
-.user-name {
+.user-info-label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #0096FF;
+}
+
+/* .user-name {
     color: lightgray;
     font-size: 36px;
     text-align: left;
@@ -23,7 +29,7 @@ img {
     font-weight: bold;
     padding-bottom: 5px;
     padding-top: 10px
-}
+} */
 
 .title {
     font-size: 20px;

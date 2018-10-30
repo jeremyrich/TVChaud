@@ -23,4 +23,6 @@ app_name = 'user'
 urlpatterns = [
     url(r'^(?P<user_id>[0-9]+)/$', views.user_details, name='user_details'),
 
+    # ajax pour ajouter un favori
+    url(r'^ajax/add_to_favorites/$', views.ajax_add_favorite, name="ajax_add_favorite"),
 ]

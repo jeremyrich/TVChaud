@@ -4,6 +4,7 @@
 
 {% block static %}
     <link rel="stylesheet" type="text/css" href="{% static 'series/css/series_details.css' %}"/>
+    <script src="{% static 'series/js/details.js' %}"></script>
 {% endblock%}
 
 
@@ -89,7 +90,7 @@
 
     <!-- Add to Favorites button -->
     <div class="col-xs-2 favorites">
-        <button type="submit" class="favorite-button" > <span style="font-size: 30px;"> + </span> <br/> Add to favorites</button>
+        <button type="submit" class="favorite-button" id="add-fav-button" onclick="add_to_fav({{ request.user.id }}, {{ details.tv_id }})"> <span style="font-size: 30px;"> + </span> <br/> Add to favorites</button>
     </div>
 
     <!-- Similar shows at the bottom of the page -->

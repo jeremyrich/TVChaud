@@ -1,4 +1,4 @@
-// Fonction pour rediriger vers la page correspondant à la notification
+// Fonction pour cocher la notif comme lue au moment de la redirection vers la page correspondante
 function see_notif(notif_id) {
 
     url = '/series/ajax/see_notif/';
