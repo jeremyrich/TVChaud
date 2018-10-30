@@ -75,12 +75,9 @@ class APIClient:
                           'name': details['name'],
                           'number_of_episodes': details['number_of_episodes'],
                           'origin_country': details['origin_country'][0],
-                          'language': details['original_language'],
                           'overview': details['overview'],
-                          'popularity': details['popularity'],
                           'poster': 'https://image.tmdb.org/t/p/w500' + details['poster_path'],
                           'first_air_date': details['first_air_date'],
-                          'next_episode_to_air': details['next_episode_to_air'],
                           'vote_average': details['vote_average'],
                           'seasons': show_seasons}
 
@@ -108,7 +105,7 @@ class APIClient:
         return reviews['results']
 
 
-    # API Call : Retourne les recommandations de shows similaires
+    # API Call : Retourne les recommandations de shows similaires (dans la limite de 12 shows)
     def get_tv_shows_similar(self, tv_id):
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/similar'
         similar = self.call('GET', url)
@@ -127,7 +124,8 @@ class APIClient:
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/season/' + str(season_number)
         season_details = self.call('GET', url)
 
-        image = 'https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png' if season_details['poster_path'] is None else 'https://image.tmdb.org/t/p/w500' + season_details['poster_path']
+        image = 'https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png' if season_details['poster_path'] is None \
+            else 'https://image.tmdb.org/t/p/w500' + season_details['poster_path']
 
         episodes = []
         for ep in season_details['episodes']:
@@ -137,9 +135,15 @@ class APIClient:
             vote_average = round(ep['vote_average'], 1)
 
             stars = 'None' if len(ep['guest_stars']) == 0 else ', '.join([actor['name'] for actor in ep['guest_stars']])
-    
-            episode = {'name': name, 'overview': overview, 'vote_average': vote_average, 'stars': stars, 'air_date': ep['air_date']}
+
+            ep['still_path'] = 'https://wingslax.com/wp-content/uploads/2017/12/no-image-available.png' if ep['still_path'] is None \
+                else 'https://image.tmdb.org/t/p/w500' + ep['still_path']
+
+            episode = {'name': name, 'overview': overview, 'vote_average': vote_average, 'stars': stars,
+                       'air_date': ep['air_date'], 'still_path': ep['still_path']}
             episodes.append(episode)
+
+
 
         output = {'season_name': season_details['name'],
                 'poster_path': image,

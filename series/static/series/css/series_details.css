@@ -28,7 +28,6 @@
     margin-top: 10px;
     transition-duration: 0.4s;
     border-radius: 5px;
-
     margin-top: 10px;
 }
 
@@ -104,6 +103,8 @@ img {
     text-align: right;
     font-style: italic;
 }
+
+a:hover {color: lightgray;}
 
 .cover-btn:hover {
     filter: brightness(80%);

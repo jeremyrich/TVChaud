@@ -9,12 +9,11 @@
 
 {% block content %}
 
-    <!-- Side bar with seasons -->
+    <!-- Sidebar with all seasons in series-->
     <div class="col-xs-2 seasons">
         {% include 'series/series_sidebar.html' with object=details %}
     </div>
 
-    <!-- Show details -->
     <div class="col-xs-8 movies">
 
         <div class="col-xs-12 title">
@@ -26,6 +25,7 @@
                 <img src="{{ details.poster }}" width=100% />
         </div>
 
+        <!--Under series title and next to picture, we have main info linked to the movie-->
         <div class="col-xs-8">
 
             <div class="movie-description">
@@ -57,6 +57,7 @@
             </div>
         </div>
 
+        <!--List of main actors in the series-->
         <div class="col-xs-12 movie-actors">
             <div class="small-title">Actors: </div>
 
