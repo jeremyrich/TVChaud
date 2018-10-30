@@ -12,8 +12,8 @@ from django.contrib.auth.models import User as djangoUser
 
 @login_required
 def user_details(request, user_id):
-
-    user = User(request.user.id, request.user.username, request.user.password)
+    intermediate = djangoUser.objects.get(id=user_id)
+    user = User(intermediate.id, intermediate.username, intermediate.password)
     friends = user.get_friends()
 
     # On appelle le multithreading pour obtenir les favorites du user
