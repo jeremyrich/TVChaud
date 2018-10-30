@@ -67,7 +67,7 @@
 
                     <!-- Dropdown pour User -->
                     <div class="dropdown-menu dropdown-user-custom" aria-labelledby="user-dropdown-button">
-                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="{% url 'user:user_details' request.user.id %}">Profile</a>
                         <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>
                     </div>
 

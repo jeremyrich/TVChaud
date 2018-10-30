@@ -86,3 +86,8 @@ img {
 }
 
 a:hover {color: lightgray;}
+
+.cover-btn:hover {
+    filter: brightness(80%);
+    color: lightgray;
+}

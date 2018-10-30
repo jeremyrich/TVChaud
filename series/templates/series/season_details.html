@@ -9,6 +9,7 @@
 
 {% block content %}
 
+    <!--Sidebar with all seasons in series-->
     <div class="col-xs-2 seasons">
         {% include 'series/series_sidebar.html' with object=show_details %}
     </div>
@@ -23,6 +24,7 @@
                 <img src="{{ season_details.poster_path }}" width=100% />
         </div>
 
+        <!--Under season title and next to picture, we have main info linked to the movie-->
         <div class="col-xs-8">
 
             <div class="movie-description">
@@ -54,14 +56,18 @@
             </div>
         </div>
 
+        <!--List of episodes in the season, with title, picture, and description-->
         <div class="col-xs-12 episodes">
 
         {% for episode in season_details.episodes %}
             <div class="col-xs-12 single_episode">
 
                 <div class="small-title"> {{ episode.name }}</div>
-                <div class="col-xs-7 movie-description"> {{ episode.overview }}</div>
-                <div class="col-xs-5 movie-infos">
+                <div class="col-xs-2 episode-image">
+                    <img src="{{ episode.still_path }}" width="100%"/>
+                </div>
+                <div class="col-xs-6 movie-description"> {{ episode.overview }}</div>
+                <div class="col-xs-4 movie-infos">
                     <b>Average user rating : </b>{{ episode.vote_average }} / 10 <br/>
                     <b>Air date : </b>{{ episode.air_date }} <br/>
                 </div>
@@ -82,6 +88,7 @@
         </div>
     </div>
 
+    <!--Add to Favorites button-->
     <div class="col-xs-2 favorites">
         <button type="submit" class="favorite-button" > <span style="font-size: 30px;"> + </span> <br/>
             Add show to favorites</button>
