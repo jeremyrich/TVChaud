@@ -91,8 +91,13 @@
 
     <!--Add to Favorites button-->
     <div class="col-xs-2 favorites">
-        <button type="submit" class="favorite-button" id="add-fav-button" onclick="add_to_fav({{ request.user.id }}, {{ details.tv_id }})"> <span style="font-size: 30px;"> + </span> <br/>
-            Add to favorites</button>
+        <button type="submit" class="favorite-button{% if is_fav %}-added{% endif %}" id="add-fav-button" onclick="add_to_fav({{ request.user.id }}, {{ details.tv_id }})">
+            {% if is_fav %}
+                Added to favorites
+            {% else %}
+                <span style="font-size: 30px;"> + </span> <br/>Add to favorites
+            {% endif %}
+        </button>
     </div>
 
 

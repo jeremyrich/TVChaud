@@ -62,7 +62,7 @@
                     <!-- Le bouton User -->
                     <a class="dropdown-toggle dropdown-btn" id="user-dropdown-button" data-toggle="dropdown">
                         <img class="header-icon" src="{% static 'icons/member.png' %}">
-                        <span class="username-text">{{ user.username }}</span>
+                        <span class="username-text">{{ request.user.username }}</span>
                     </a>
 
                     <!-- Dropdown pour User -->
