@@ -2,6 +2,7 @@ from database_helper import query
 
 class Notification:
 
+    # constructeur
     def __init__(self, notification_id, user_id, tv_id, season, episode, seen):
         self.__notification_id = notification_id
         self.__user_id = user_id

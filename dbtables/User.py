@@ -14,7 +14,6 @@ class User:
         self.__username = username
         self.__password = password
 
-
     # getters
     def _get_user_id(self):
         return self.__user_id
@@ -25,7 +24,6 @@ class User:
     def _get_password(self):
         return self.__password
 
-
     # properties
     user_id = property(_get_user_id)
     username = property(_get_username)
@@ -33,12 +31,7 @@ class User:
 
 
     # methods for favorites
-    def add_favorite(self, tv_id):
-        command = """INSERT INTO favorite(user_id, tv_id) VALUES(?, ?)"""
-        data = (self.__user_id, tv_id)
-        query(command, data)
-
-    def get_my_favorites(self):
+    def get_favorites(self):
         command = """SELECT * FROM favorite WHERE user_id=?"""
         data = (self.__user_id,)
         fav_query = query(command, data)
