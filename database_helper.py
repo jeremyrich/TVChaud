@@ -10,9 +10,8 @@ def query(command, data=None):
     """
     if data == None:
         my_query = cursor.execute(command)
-        my_query = my_query.fetchall()
     else:
         my_query = cursor.execute(command, data)
 
     conn.commit()
-    return my_query
+    return my_query.fetchall()

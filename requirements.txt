@@ -1,6 +1,6 @@
 Django==2.1.2
 django-bootstrap3==11.0.0
 oauthlib==2.1.0
-requests==2.19.1
+requests==2.20.0
 social-auth-app-django==2.1.0
 social-auth-core==1.7.0

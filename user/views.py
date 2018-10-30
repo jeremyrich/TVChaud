@@ -1,7 +1,12 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-import user.ThreadFavorites as ThreadFavorites
+from django.http import JsonResponse
+
+from user.FavoriteThread import get_user_favorites
 from dbtables.User import User
+from dbtables.Favorite import Favorite
+
+
 # Create your views here.
 from django.contrib.auth.models import User as djangoUser
 
@@ -10,13 +15,24 @@ def user_details(request, user_id):
     intermediate = djangoUser.objects.get(id=user_id)
     user = User(intermediate.id, intermediate.username, intermediate.password)
     friends = user.get_friends()
-    # Retourne une liste d'objets Favorite
-    favorites = user.get_my_favorites()
-    # on appelle le multithreading depuis les objets Favorites
-    favorites_details = ThreadFavorites.get_user_favorites(favorites)
-    output = {'user_id': user_id,
-              'user': user,
-              'details': favorites_details,
-              'friends': friends
-              }
-    return render(request, 'user/user_details.html', output)
+
+    # On appelle le multithreading pour obtenir les favorites du user
+    favorites = get_user_favorites(user)
+
+    print(favorites)
+
+    return render(request, 'user/user_details.html', locals())
+
+
+@login_required
+def ajax_add_favorite(request):
+    user_id = request.GET.get('user_id', None)
+    tv_id = request.GET.get('tv_id', None)
+
+    fav = Favorite(user_id, tv_id)
+    if fav.is_in_db():
+        fav.delete()
+        return JsonResponse({'button_text': '<span style="font-size: 30px;"> + </span> <br/> Add to favorites', 'class': 'favorite-button'})
+
+    fav.insert()
+    return JsonResponse({'button_text': 'Added in favorites', 'class': 'favorite-button-added'})

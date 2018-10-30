@@ -8,32 +8,25 @@
 
 {% block content %}
 
-    <!--Side bar with user name and number of favorites-->
+    <!-- Side bar with user name and number of favorites -->
      <div class="col-xs-2 menu">
-            <b>User name :</b><br/>
-            {{user.username}}<br/>
-            <b>Number of favorite tv shows :</b><br/>
-            {{details|length}}<br/>
-            <b>{{django_user.username}}</b><br/>
-
+        <div class="user-info-label">Username</div>
+        {{ user.username }}
      </div>
 
     <!--List of user favorites, with show title, picture, and description-->
-    <div class="col-xs-8 favorites">
-        <div class="big-title"> Favorites</div>
+    <div class="col-xs-8">
+        <div class="big-title">Favorites - {{ favorites|length }} show{{ favorites|length|pluralize }}</div>
 
-        {% for favorite in details %}
+        {% for favorite in favorites %}
             <div class="col-xs-12 unique_favorite">
-                <div class="col-xs-9 title">
-                    <a href="{{ favorite.link }}">
-                        <b>{{ favorite.name }}</b></a>
+                
+                <div class="col-xs-12 title">
+                    <a href="{% url 'series:details' favorite.tv_id %}"><b>{{ favorite.name }}</b></a>
                 </div>
 
-                <!--<div class="col-xs-3 favorite-button">Remove from favorites</div>-->
-
                 <div class="col-xs-4 movie-image">
-                    <a href="{{ favorite.link }}">
-                        <img src="{{ favorite.poster }}" width=80% /></a>
+                    <a href="{% url 'series:details' favorite.tv_id %}"><img src="{{ favorite.poster }}" width=80% /></a>
                 </div>
 
                 <div class="col-xs-8">
@@ -51,10 +44,8 @@
 
                 </div>
             </div>
-
-
-
         {% endfor %}
+
     </div>
 
 {% endblock %}

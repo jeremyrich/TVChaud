@@ -33,17 +33,17 @@ cursor.execute("""
     )
 """)
 
-# Table : EPISODE_SEEN
-# table pour stocker les épisodes déjà vus par un user (utilisé seulement pour ses favoris), permet de créer des notifications à la sortie d'un nouvel épisode
-cursor.execute("""
-    CREATE TABLE episode_seen (
-        episode_seen_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-        user_id INTEGER,
-        tv_id INTEGER,
-        season INTEGER,
-        episode INTEGER
-    )
-""")
+# # Table : EPISODE_SEEN
+# # table pour stocker les épisodes déjà vus par un user (utilisé seulement pour ses favoris), permet de créer des notifications à la sortie d'un nouvel épisode
+# cursor.execute("""
+#     CREATE TABLE episode_seen (
+#         episode_seen_id INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
+#         user_id INTEGER,
+#         tv_id INTEGER,
+#         season INTEGER,
+#         episode INTEGER
+#     )
+# """)
 
 # Table : NOTIFICATION
 cursor.execute("""

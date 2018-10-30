@@ -3,7 +3,7 @@ from .APIClient import APIClient
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
-from user.user_notifs import load_notifications
+from user.NotifThread import load_notifications
 
 from dbtables.Notification import Notification
 

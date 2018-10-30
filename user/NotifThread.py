@@ -1,8 +1,7 @@
-# une seule fonction destinée à être utilisée à chaque chargement de view, pour loader les notifications dans le header
-
 from dbtables.User import User
 from threading import Thread
 from series.APIClient import APIClient
+
 
 class NotifThread(Thread):
     
@@ -18,9 +17,11 @@ class NotifThread(Thread):
          self.details['title'] = show_details['name']
 
 
+# Fonction destinée à être utilisée à chaque chargement de view, pour loader les notifications dans le header
 def load_notifications(request):
 
-    myuser = User(request)
+    myuser = User(request.user.id, request.user.username, request.user.password)
+
     notifs = myuser.get_notifications()
 
     alert = False
