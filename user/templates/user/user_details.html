@@ -23,12 +23,12 @@
 
         {% for favorite in details %}
             <div class="col-xs-12 unique_favorite">
-                <div class="col-xs-12 title">
+                <div class="col-xs-9 title">
                     <a href="{{ favorite.link }}">
                         <b>{{ favorite.name }}</b></a>
                 </div>
 
-
+                <!--<div class="col-xs-3 favorite-button">Remove from favorites</div>-->
 
                 <div class="col-xs-4 movie-image">
                     <a href="{{ favorite.link }}">
@@ -45,6 +45,8 @@
                         <b>Overview:</b><br/>
                         <span style="font-style: italic">{{ favorite.overview }}</span>
                     </div>
+
+                    <div class="col-xs-5 col-xs-offset-7 favorite-button">Remove from favorites</div>
 
                 </div>
             </div>
