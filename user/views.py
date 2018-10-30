@@ -8,11 +8,13 @@ from dbtables.Favorite import Favorite
 
 
 # Create your views here.
+from django.contrib.auth.models import User as djangoUser
 
 @login_required
 def user_details(request, user_id):
 
     user = User(request.user.id, request.user.username, request.user.password)
+    friends = user.get_friends()
 
     # On appelle le multithreading pour obtenir les favorites du user
     favorites = get_user_favorites(user)

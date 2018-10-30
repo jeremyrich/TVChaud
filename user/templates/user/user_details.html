@@ -20,6 +20,7 @@
 
         {% for favorite in favorites %}
             <div class="col-xs-12 unique_favorite">
+                
                 <div class="col-xs-12 title">
                     <a href="{% url 'series:details' favorite.tv_id %}"><b>{{ favorite.name }}</b></a>
                 </div>
@@ -38,6 +39,8 @@
                         <b>Overview:</b><br/>
                         <span style="font-style: italic">{{ favorite.overview }}</span>
                     </div>
+
+                    <div class="col-xs-5 col-xs-offset-7 favorite-button">Remove from favorites</div>
 
                 </div>
             </div>

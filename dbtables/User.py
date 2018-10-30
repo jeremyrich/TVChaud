@@ -1,16 +1,18 @@
 from database_helper import query
 from datetime import datetime
 
+from django.contrib.auth.models import User as djangoUser
+
 from dbtables.Favorite import Favorite
 from dbtables.Notification import Notification
 
 class User:
 
     # constructeur
-    def __init__(self, request):
-        self.__user_id = request.user.id
-        self.__username = request.user.username
-        self.__password = request.user.password
+    def __init__(self, id, username, password):
+        self.__user_id = id
+        self.__username = username
+        self.__password = password
 
     # getters
     def _get_user_id(self):
@@ -61,4 +63,19 @@ class User:
         command = """INSERT INTO friend_request(from_user, to_user, message) VALUES(?, ?, ?)"""
         data = (self.__user_id, to_user, text)
         query(command, data)
+
+    def get_friends(self):
+        command = """ SELECT * FROM friendship WHERE user_id_1=? OR user_id_2=?"""
+        data = (self.__user_id, self.__user_id)
+        friends = query(command, data)
+        list_friends = []
+        for friend in friends:
+            if friend[1] == self.__user_id:
+                intermediate = djangoUser.objects.get(id=friend[2])
+                list_friends.append(User(intermediate.id, intermediate.username, intermediate.password))
+            elif friend[2] == self.__user_id:
+                intermediate = djangoUser.objects.get(id=friend[1])
+                list_friends.append(User(intermediate.id, intermediate.username, intermediate.password))
+        return list_friends
+
 
