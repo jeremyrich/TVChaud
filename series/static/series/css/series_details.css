@@ -51,6 +51,29 @@
 	cursor: pointer;
 }
 
+.favorite-button-added {
+    font-size: 16px;
+	background-color: #50CE1A;
+	display: inline-block;
+	border: 3px solid #50CE1A;
+    color: white;
+    padding: 3px 15px;
+    padding-top: 0px;
+    text-align: center;
+    text-decoration: none;
+    margin-top: 10px;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+
+    margin-top: 10px;
+}
+
+.favorite-button-added:hover {
+    background-color: #4F4F4F;
+	color: #50CE1A;
+	cursor: pointer;
+}
+
 .favorite-button:hover {
 	background-color: #4F4F4F;
 	color: #0096FF;
