@@ -19,8 +19,6 @@ def user_details(request, user_id):
     # On appelle le multithreading pour obtenir les favorites du user
     favorites = get_user_favorites(user)
 
-    print(favorites)
-
     return render(request, 'user/user_details.html', locals())
 
 
@@ -35,4 +33,4 @@ def ajax_add_favorite(request):
         return JsonResponse({'button_text': '<span style="font-size: 30px;"> + </span> <br/> Add to favorites', 'class': 'favorite-button'})
 
     fav.insert()
-    return JsonResponse({'button_text': 'Added in favorites', 'class': 'favorite-button-added'})
+    return JsonResponse({'button_text': 'Added to favorites', 'class': 'favorite-button-added'})

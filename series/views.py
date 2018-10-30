@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from user.NotifThread import load_notifications
 
 from dbtables.Notification import Notification
+from dbtables.Favorite import Favorite
 
 
 # Create your views here.
@@ -30,6 +31,9 @@ def series_details(request, tv_id):
     reviews = client.get_tv_shows_reviews(tv_id)
     similar = client.get_tv_shows_similar(tv_id)
 
+    # Détermine si ce show est dans les favoris de l'utilisateur
+    is_fav = Favorite(request.user.id, tv_id).is_in_db()
+
     notifs = load_notifications(request)
 
     return render(request, 'series/series_details.html', locals())
@@ -41,6 +45,9 @@ def season_details(request, tv_id, season_number):
     client = APIClient()
     show_details = client.get_tv_show_details(tv_id)
     season_details = client.get_season_details(tv_id, season_number)
+
+    # Détermine si ce show est dans les favoris de l'utilisateur
+    is_fav = Favorite(request.user.id, tv_id).is_in_db()
 
     notifs = load_notifications(request)
 
