@@ -25,4 +25,7 @@ urlpatterns = [
 
     # ajax pour ajouter un favori
     url(r'^ajax/add_to_favorites/$', views.ajax_add_favorite, name="ajax_add_favorite"),
+
+    # ajax pour enlever un favori
+    url(r'^ajax/remove_from_favorites/$', views.ajax_remove_favorite, name="ajax_remove_favorite")
 ]

@@ -11,6 +11,7 @@ function add_to_fav(user_id, tv_id) {
         success: function(data) {
             console.log('added to favorites');
 
+            // Changement du bouton selon si la série est favorite ou pas: "Added to favorites" ou "+ Add to favorites"
             mybutton = $('#add-fav-button');
             mybutton.html(data['button_text']);
             mybutton.removeClass();
