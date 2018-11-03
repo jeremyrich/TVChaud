@@ -12,7 +12,12 @@
     <!-- Side bar with user name and number of favorites -->
      <div class="col-xs-2 menu">
         <div class="user-info-label">Username</div>
-        {{ user.username }}
+        {{ user.username }}<br/><br/>
+        <div class="user-info-label">Friends</div>
+         {% for friend in friends %}
+         {{ friend.username }}<br/>
+         {% endfor %}
+
      </div>
 
     <!--List of user favorites, with show title, picture, and description-->
