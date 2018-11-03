@@ -68,6 +68,27 @@ img {
 	cursor: pointer;
 }
 
+.favorite-button-removed {
+	font-size: 16px;
+	background-color: #0096FF;
+	display: inline-block;
+	border: 3px solid #0096FF;
+    color: white;
+    padding: 3px 15px;
+    padding-top: 0px;
+    text-align: center;
+    text-decoration: none;
+    transition-duration: 0.4s;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.favorite-button-removed:hover {
+	background-color: #4F4F4F;
+	color: #0096FF;
+	cursor: pointer;
+}
+
 a:hover {color: lightgray;}
 
 .movie-image:hover {

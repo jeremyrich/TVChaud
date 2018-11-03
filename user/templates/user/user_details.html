@@ -4,6 +4,7 @@
 
 {% block static %}
     <link rel="stylesheet" type="text/css" href="{% static 'user/css/details.css' %}"/>
+    <script src="{% static 'user/js/user_details.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -16,10 +17,10 @@
 
     <!--List of user favorites, with show title, picture, and description-->
     <div class="col-xs-8">
-        <div class="big-title">Favorites - {{ favorites|length }} show{{ favorites|length|pluralize }}</div>
+        <div class="big-title" id="favorites_title">Favorites - {{ favorites|length }} show{{ favorites|length|pluralize }}</div>
 
         {% for favorite in favorites %}
-            <div class="col-xs-12 unique_favorite">
+            <div class="col-xs-12 unique_favorite" id="{{favorite.tv_id}}">
                 
                 <div class="col-xs-12 title">
                     <a href="{% url 'series:details' favorite.tv_id %}"><b>{{ favorite.name }}</b></a>
@@ -40,7 +41,12 @@
                         <span style="font-style: italic">{{ favorite.overview }}</span>
                     </div>
 
-                    <div class="col-xs-5 col-xs-offset-7 favorite-button">Remove from favorites</div>
+                    <button type="submit" class="col-xs-5 col-xs-offset-7 favorite-button"
+                            id="remove_fav_button_{{favoritetv_id}}"
+                            onclick="remove_from_fav({{ request.user.id }}, {{ favorite.tv_id }})">
+                        Remove from favorites
+
+                    </button>
 
                 </div>
             </div>
