@@ -1,7 +1,11 @@
 from threading import Thread
 from dbtables.Favorite import Favorite
 
+""" 
+When Thread is launched, it will make the API call from the get_favorite_details 
+function. Multithreading allows us to make multiple API calls simultaneously
 
+"""
 class FavoriteThread(Thread):
 
     def __init__(self, favorite):

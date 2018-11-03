@@ -64,6 +64,7 @@ class User:
         data = (self.__user_id, to_user, text)
         query(command, data)
 
+    # Returns the list of friends for the current user
     def get_friends(self):
         command = """ SELECT * FROM friendship WHERE user_id_1=? OR user_id_2=?"""
         data = (self.__user_id, self.__user_id)
