@@ -11,6 +11,8 @@ from dbtables.Favorite import Favorite
 
 # Create your views here.
 
+# View of the home page. Call the API to get the most popular tv shows
+# to be displayed on the welcome page
 @login_required
 def home(request):
 
@@ -21,7 +23,7 @@ def home(request):
 
     return render(request, 'series/home.html', locals())
 
-
+# View for one specific tv show given its id
 @login_required
 def series_details(request, tv_id):
 
@@ -38,7 +40,7 @@ def series_details(request, tv_id):
 
     return render(request, 'series/series_details.html', locals())
 
-
+# View of one specific season of one specific tv show given the tv_id and season number
 @login_required
 def season_details(request, tv_id, season_number):
 

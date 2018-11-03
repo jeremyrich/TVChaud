@@ -1,23 +1,7 @@
 """API Client for the The Movie DB api
 All functions are stored here and API calls made with the API key stored in settings.py"""
 
-"""
-Je veux :
-- image
-- noms des acteurs
-- réalisateur
-- pays
-- duration
-- categories (drame, comedy...)
-- date de sortie
-- rating
-- synopsis
-- saisons et épisodes       
-- reviews   
-- Others ?
-- id
 
-"""
 from django.conf import settings
 import requests
 
