@@ -10,14 +10,16 @@ function remove_from_fav(user_id, tv_id) {
         success: function(data) {
             console.log('removed from favorites');
 
-            //Hide the removed favorite
-            favorite = $('#' + tv_id)
-            favorite.hide()
+            // On cache le favori supprimé
+            favorite = $('#' + tv_id);
+            favorite.hide();
 
-            //Change page title to update with new number of favorites
+            // On change le titre de la page pour afficher le bon nombre de favoris
             new_title = "Favorites - " + data['num_favorites'] + " show"
-            if (data['num_favorites'] != 1) {new_title += "s"}
-            $('#favorites_title').text(new_title)
+            if (data['num_favorites'] != 1) {
+                new_title += "s";
+            }
+            $('#favorites_title').text(new_title);
         },
-    })
+    });
 };
