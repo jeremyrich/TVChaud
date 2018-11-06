@@ -46,7 +46,7 @@ class User:
 
     # method to get notification of current user
     def get_notifications(self):
-        command = """SELECT * FROM notification WHERE user_id = ?"""
+        command = """SELECT * FROM notification WHERE user_id = ? ORDER BY notification_id DESC LIMIT 10"""
         data = (self.__user_id,)
         notif_query = query(command, data)
         notifications = []
@@ -56,12 +56,17 @@ class User:
             notifications.append(n)
         return notifications
 
+    # methods for friend requests
+    def get_friend_requests(self):
+        command = """SELECT * FROM friend_request WHERE to_user=?"""
+        data = (self.__user_id,)
+        return query(command, data)
 
-    # method to send friend request to another user
-    def send_friend_request(self, to_user, text=None):
-        command = """INSERT INTO friend_request(from_user, to_user, message) VALUES(?, ?, ?)"""
-        data = (self.__user_id, to_user, text)
+    def send_friend_request(self, to_user):
+        command = """INSERT INTO friend_request(from_user, to_user) VALUES(?, ?)"""
+        data = (self.__user_id, to_user)
         query(command, data)
+
 
     # Returns the list of friends for the current user
     def get_friends(self):
