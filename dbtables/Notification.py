@@ -1,5 +1,6 @@
 from database_helper import query
 
+# Class to manage notifications
 class Notification:
 
     # constructeur
@@ -44,12 +45,15 @@ class Notification:
 
 
     # static methods
+
+    # Change the seen value to 1 when the notification has been seen
     @staticmethod
     def check_as_seen(notif_id):
         command = """UPDATE notification SET seen = 1 WHERE notification_id = ?"""
         data = (notif_id,)
         query(command, data)
 
+    # Change the seen value (so user can set notification to seen/unseen if he wants to)
     @staticmethod
     def check_seen_unseen(notif_id):
         command = """UPDATE notification SET seen = (CASE WHEN seen = 1 THEN 0 ELSE 1 END) WHERE notification_id = ?"""

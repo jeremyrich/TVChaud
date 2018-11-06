@@ -1,6 +1,7 @@
 from series.APIClient import APIClient
 from database_helper import query
 
+# Class that creates Favorite object which associates one user and one tv show
 class Favorite():
 
     # constructeur
@@ -21,7 +22,7 @@ class Favorite():
 
     # Methods to work on the Favorite object
 
-    #  API call : Returns the tv show's details of the current favorite
+    # API call : Returns the tv show's details of the current favorite
     def get_favorite_details(self):
         client = APIClient()
         details = client.get_tv_show_details(self.tv_id)
@@ -34,7 +35,7 @@ class Favorite():
         result = query(command, data)
         return len(result) > 0
 
-    # Add tv show from the user's favorites
+    # Add tv show to the user's favorites
     def insert(self):
         command = """INSERT INTO favorite(user_id, tv_id) VALUES(?, ?)"""
         data = (self.__user_id, self.__tv_id)
