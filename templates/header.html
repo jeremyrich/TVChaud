@@ -10,14 +10,36 @@
 
     <div class="container-fluid">
 
-        <!-- Buttons on the right -->
+        <!-- Buttons on the right of the navbar -->
         <ul class="nav navbar-nav navbar-right">
+
+            <!-- Button Add Friend -->
+            <li>
+                    <div class="dropdown dropdown-btn-container" id="button-add-friend-container">
+    
+                        <!-- The Button "Add Friend" itself -->
+                        <a class="dropdown-toggle dropdown-btn" id="add-friend-dropdown-button" data-toggle="dropdown">
+                            <img class="header-icon" src="{% static 'icons/addfriend.png' %}">
+                        </a>
+    
+                        <!-- Dropdown with input field -->
+                        <div class="dropdown-menu dropdown-add-friend-custom" id="dropdown-add-friend" aria-labelledby="add-friend-dropdown-button">
+                            <div class="col-xs-9 col-add-friend">
+                                <input type="text" id="friend-username-id" class="form-control add-friend-field" placeholder="Add friend..."/>
+                            </div>
+                            <div class="col-xs-3 col-add-friend">
+                                    <button class="btn btn-add-friend" onclick="send_friend_request()">Invite</button>
+                            </div>
+                        </div>
+    
+                    </div>
+                </li>
 
             <!-- Button Notifications -->
             <li>
                 <div class="dropdown dropdown-btn-container" id="button-notif-container">
 
-                    <!-- The notification button: red if a notification is unread, transparent otherwise -->
+                    <!-- The button "Notif" itself : red if there is at least one unseen notif, else transparent -->
                     {% if notifs.alert %}
                         <a class="dropdown-toggle dropdown-btn notif-alert" id="notif-dropdown-button" data-toggle="dropdown">
                             <img class="header-icon" src="{% static 'icons/ringbell_white.png' %}"/>
@@ -28,8 +50,30 @@
                         </a>
                     {% endif %} 
 
-                    <!-- Dropdown pour les notifs-->
+                    <!-- Dropdown for notifs-->
                     <div class="dropdown-menu dropdown-notif-custom" aria-labelledby="notif-dropdown-button">
+
+                        <!-- Part Friend Requests -->
+                        <div class="dropdown-header-custom">Friend Requests</div>
+                        {% for request in notifs.friend_requests %}
+                            <div class="notif-container" id="friend-request-{{ request.friend_request_id }}">
+                                <div class="notif-message notif-message-no-alert">
+                                    <div class="col-xs-7 request-text">
+                                        Friend request from <b>{{ request.from_user }}</b>
+                                    </div>
+                                    <div class="col-xs-5">
+                                        <button class="btn btn-default" onclick="accept_friend_request({{ request.friend_request_id }})">Accept</button>
+                                        <button class="btn btn-danger" onclick="decline_friend_request({{ request.friend_request_id }})">Decline</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <div class="notif-container no-notifs">
+                                No pending requests
+                            </div>
+                        {% endfor %}
+
+                        <!-- Part Notifications Episodes -->
                         <div class="dropdown-header-custom">New Episodes</div>
                         {% for ep in notifs.new_episodes %}
                             <div class="notif-container">
@@ -49,7 +93,12 @@
                                     </a>
                                 </div>
                             </div>
+                        {% empty %}
+                            <div class="notif-container no-notifs">
+                                No notifications
+                            </div>
                         {% endfor %}
+
                     </div>
 
                 </div>
@@ -59,13 +108,13 @@
             <li>
                 <div class="dropdown dropdown-btn-container">
 
-                    <!-- Le bouton User -->
+                    <!-- The button User itself -->
                     <a class="dropdown-toggle dropdown-btn" id="user-dropdown-button" data-toggle="dropdown">
                         <img class="header-icon" src="{% static 'icons/member.png' %}">
                         <span class="username-text">{{ request.user.username }}</span>
                     </a>
 
-                    <!-- Dropdown pour User -->
+                    <!-- Dropdown for User -->
                     <div class="dropdown-menu dropdown-user-custom" aria-labelledby="user-dropdown-button">
                         <a class="dropdown-item" href="{% url 'user:user_details' request.user.id %}">Profile</a>
                         <a class="dropdown-item" href="{% url 'logout' %}">Logout</a>

@@ -14,12 +14,6 @@
 
 
 /* Dropdown */
-.dropdown-custom > a {
-    color: lightgray !important;
-    font-family: Raleway;
-    font-size: 15px;
-}
-
 .dropdown-header-custom {
     font-weight: bold;
     color: lightgray;
@@ -63,6 +57,34 @@
 }
 
 
+/* Add Friend panel */
+.dropdown-add-friend-custom {
+    background-color: #4F4F4F;
+    min-width: 350px;
+    padding: 8px 4px;
+}
+
+.col-add-friend {
+    padding: 0px 4px;
+}
+
+.add-friend-field {
+    background-color: #444444;
+    color: white;
+    border-color: #333333;
+}
+
+.btn-add-friend {
+    width: 100%;
+    background-color: #444444;
+    color: white !important;
+}
+
+.btn-add-friend:hover, .btn-add-friend:focus {
+    background-color: #333333;
+}
+
+
 /* Notifications panel */
 .dropdown-notif-custom {
     background-color: #4F4F4F;
@@ -85,6 +107,23 @@
     background-color: #E53939;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
 }
+
+.request-text {
+    color: white;
+    margin-top: 8px;
+}
+
+.no-notifs {
+    color: lightgray;
+    text-align: center;
+    padding-top: 15px;
+}
+
+.notif-message-no-alert > .col-xs-5{
+    text-align: right;
+    margin-top: 11px;
+}
+
 
 /* Notif link to episode details */
 .notif-image {

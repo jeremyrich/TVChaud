@@ -4,12 +4,14 @@ from django.http import JsonResponse
 
 from user.FavoriteThread import get_user_favorites
 from user.NotifThread import load_notifications
+
 from dbtables.User import User
 from dbtables.Favorite import Favorite
+from dbtables.FriendRequest import FriendRequest
 
+from django.contrib.auth.models import User as djangoUser
 
 # Create your views here.
-from django.contrib.auth.models import User as djangoUser
 
 @login_required
 def user_details(request, user_id):
@@ -42,6 +44,7 @@ def ajax_add_favorite(request):
     fav.insert()
     return JsonResponse({'button_text': 'Added to favorites', 'class': 'favorite-button-added'})
 
+
 @login_required
 def ajax_remove_favorite(request):
     user_id = request.GET.get('user_id', None)
@@ -55,10 +58,50 @@ def ajax_remove_favorite(request):
     # # to change the page title adapted to the new number of favorites
     favorites = get_user_favorites(user)
     num_favorites = len(favorites)
-    print(num_favorites)
 
     # We then delete the favorite from user's lsit and update the number of favorites
     fav.delete()
     num_favorites -= 1
     return JsonResponse({'num_favorites': num_favorites})
+
+
+@login_required
+def ajax_send_friend_request(request):
+    to_username = request.GET.get('to_username', None)
+
+    current_user = User(request.user.id, request.user.username, request.user.password)
+    is_valid = True
+
+    try:
+        to_user = djangoUser.objects.get(username=to_username)
+        current_user.send_friend_request(to_user.id)
+
+    except djangoUser.DoesNotExist:
+        print('no such user in the db')
+        is_valid = False
+
+    return JsonResponse({'valid_username': is_valid})
+
+
+@login_required
+def ajax_accept_friend_request(request):
+    friend_request_id = request.GET.get('friend_request_id', None)
+
+    friend_request = FriendRequest.get_friend_request(friend_request_id)
+
+    friend_request.accept()
+    friend_request.delete()
+
+    return JsonResponse({'accepted': True})
+
+
+@login_required
+def ajax_decline_friend_request(request):
+    friend_request_id = request.GET.get('friend_request_id', None)
+
+    friend_request = FriendRequest.get_friend_request(friend_request_id)
+
+    friend_request.delete()
+
+    return JsonResponse({'accepted': False})
 

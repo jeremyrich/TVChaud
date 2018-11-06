@@ -27,5 +27,10 @@ urlpatterns = [
     url(r'^ajax/add_to_favorites/$', views.ajax_add_favorite, name="ajax_add_favorite"),
 
     # ajax pour enlever un favori
-    url(r'^ajax/remove_from_favorites/$', views.ajax_remove_favorite, name="ajax_remove_favorite")
+    url(r'^ajax/remove_from_favorites/$', views.ajax_remove_favorite, name="ajax_remove_favorite"),
+
+    # ajax pour les friend requests
+    url(r'^ajax/send_friend_request/$', views.ajax_send_friend_request, name="ajax_send_friend_request"),
+    url(r'^ajax/accept_friend_request/$', views.ajax_accept_friend_request, name="ajax_accept_friend_request"),
+    url(r'^ajax/decline_friend_request/$', views.ajax_decline_friend_request, name="ajax_decline_friend_request"),
 ]
