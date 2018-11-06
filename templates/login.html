@@ -10,7 +10,7 @@
 {% block header %}{% endblock %}
 
 {% block body %}
-
+    <!-- Main part of the page to be able to log in -->
     <body class="login-page">
         <div class="container-fluid">
 
@@ -26,6 +26,7 @@
 
                 <div class="login-panel">
 
+                    <!-- Part with blanks to log in with username and password -->
                     <form method="post" action="">
                         {% csrf_token %}
 
@@ -38,6 +39,7 @@
 
                     <hr/>
 
+                    <!-- Part to log in using google or facebook account -->
                     <a href="{% url 'social:begin' 'google-oauth2' %}" class="btn login-google login-div">
                         <div class="col-xs-3">
                             <img src="{% static 'icons/googlepluslogin.png' %}"/>
@@ -63,6 +65,7 @@
 
 {% endblock %}
 
+<!-- Add costumed classes -->
 {% block javascript %}
     <script>
         $(function() {
