@@ -6,6 +6,7 @@ from django.contrib.auth.models import User as djangoUser
 from dbtables.Favorite import Favorite
 from dbtables.Notification import Notification
 
+# Customed user class based on django user, to add specific methods
 class User:
 
     # constructeur
@@ -30,7 +31,7 @@ class User:
     password = property(_get_password)
 
 
-    # methods for favorites
+    # method that returns every favorites of current user
     def get_favorites(self):
         command = """SELECT * FROM favorite WHERE user_id=?"""
         data = (self.__user_id,)
@@ -38,21 +39,22 @@ class User:
         
         favorites = []
         for fav in fav_query:
+        # We create the Favorite object from user_id and tv_id
             favorites.append(Favorite(fav[1], fav[2]))
         return favorites
 
 
-    # methods for notifications
+    # method to get notification of current user
     def get_notifications(self):
         command = """SELECT * FROM notification WHERE user_id = ? ORDER BY notification_id DESC LIMIT 10"""
         data = (self.__user_id,)
         notif_query = query(command, data)
         notifications = []
         for notif in notif_query:
+        # We create the Notification object with the needed arguments
             n = Notification(notif[0], notif[1], notif[2], notif[3], notif[4], notif[5])
             notifications.append(n)
         return notifications
-
 
     # methods for friend requests
     def get_friend_requests(self):
@@ -68,13 +70,16 @@ class User:
 
     # Returns the list of friends for the current user
     def get_friends(self):
-        command = """ SELECT * FROM friendship WHERE user_id_1=? OR user_id_2=?"""
+        command = """SELECT * FROM friendship WHERE user_id_1=? OR user_id_2=?"""
         data = (self.__user_id, self.__user_id)
         friends = query(command, data)
         list_friends = []
         for friend in friends:
+    # two possible cases : current user is either user_1 or user_2 is the friendship table
             if friend[1] == self.__user_id:
+            # We first fetch the dango user given user_id
                 intermediate = djangoUser.objects.get(id=friend[2])
+            # Then we convert it into our customed user object
                 list_friends.append(User(intermediate.id, intermediate.username, intermediate.password))
             elif friend[2] == self.__user_id:
                 intermediate = djangoUser.objects.get(id=friend[1])

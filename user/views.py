@@ -15,32 +15,32 @@ from django.contrib.auth.models import User as djangoUser
 
 @login_required
 def user_details(request, user_id):
+    # We get the django user given the user_id
     intermediate = djangoUser.objects.get(id=user_id)
+    # We then convert it to our customed user
     user = User(intermediate.id, intermediate.username, intermediate.password)
+    # We get the list of user's friends
     friends = user.get_friends()
 
     notifs = load_notifications(request)
-
-    # On appelle le multithreading pour obtenir les favoris du user
+    # We call the multithreading to get the user's favorites
     favorites = get_user_favorites(user)
-
 
     return render(request, 'user/user_details.html', locals())
 
-
+# Actions on favorite's display, to add or remove a tv show to the favorites
 @login_required
 def ajax_add_favorite(request):
     user_id = request.GET.get('user_id', None)
     tv_id = request.GET.get('tv_id', None)
 
     fav = Favorite(user_id, tv_id)
-
-    # Si la série est déjà dans les favoris, on l'enlève et on reviendra au bouton "Add to favorites"
+    # If the tv show is already into its favorites, we delete it and we get button transforms to "Add to favorites"
     if fav.is_in_db():
         fav.delete()
         return JsonResponse({'button_text': '<span style="font-size: 30px;"> + </span> <br/> Add to favorites', 'class': 'favorite-button'})
 
-    # Sinon, on l'ajoute aux favoris, et le bouton deviendra "Added to favorites"
+    # If not, we add it to favorites, and the button transforms to  "Added to favorites"
     fav.insert()
     return JsonResponse({'button_text': 'Added to favorites', 'class': 'favorite-button-added'})
 
@@ -54,13 +54,12 @@ def ajax_remove_favorite(request):
 
     intermediate = djangoUser.objects.get(id=user_id)
     user = User(intermediate.id, intermediate.username, intermediate.password)
-
-    # On appelle le multithreading pour obtenir les favoris du user,
-    # pour pouvoir changer le titre de la page (nouveau nombre de favoris)
+    # We call the multithreading to get the user's favorites details,
+    # # to change the page title adapted to the new number of favorites
     favorites = get_user_favorites(user)
     num_favorites = len(favorites)
 
-    # On supprime le favori, et update le nombre de favoris
+    # We then delete the favorite from user's lsit and update the number of favorites
     fav.delete()
     num_favorites -= 1
     return JsonResponse({'num_favorites': num_favorites})

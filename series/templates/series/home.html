@@ -7,8 +7,12 @@
 {% endblock %}
 
 {% block content %}
+
+    <!-- We only display images for the 20 most popular TV shows on the home page,
+    with a link for the corresponding show -->
     {% for mov in movies %}
         <a href="{% url 'series:details' mov.tv_id %}" class="cover-btn">
             <img class="serie-cover" src="{{ mov.poster_path }}" /></a>
     {% endfor %}
+
 {% endblock %}

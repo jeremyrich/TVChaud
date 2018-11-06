@@ -26,14 +26,14 @@ def home(request):
 # View for one specific tv show given its id
 @login_required
 def series_details(request, tv_id):
-
+    # API call to get the tv show information
     client = APIClient()
     details = client.get_tv_show_details(tv_id)
     cast = client.get_tv_show_cast(tv_id)
     reviews = client.get_tv_shows_reviews(tv_id)
     similar = client.get_tv_shows_similar(tv_id)
 
-    # Détermine si ce show est dans les favoris de l'utilisateur
+    # Check if the show is among the user's favorites
     is_fav = Favorite(request.user.id, tv_id).is_in_db()
 
     notifs = load_notifications(request)
@@ -48,14 +48,14 @@ def season_details(request, tv_id, season_number):
     show_details = client.get_tv_show_details(tv_id)
     season_details = client.get_season_details(tv_id, season_number)
 
-    # Détermine si ce show est dans les favoris de l'utilisateur
+    # Check if the show is among the user's favorites
     is_fav = Favorite(request.user.id, tv_id).is_in_db()
 
     notifs = load_notifications(request)
 
     return render(request, 'series/season_details.html', locals())
 
-
+# Actions on notification's display
 @login_required
 def ajax_see_notif(request):
     notif_id = request.GET.get('notif_id', None)
