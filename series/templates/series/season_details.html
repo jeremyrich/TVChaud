@@ -11,11 +11,12 @@
 
 {% block content %}
 
-    <!--Sidebar with all seasons in series-->
+    <!-- Sidebar with all seasons in series -->
     <div class="col-xs-2 seasons">
         {% include 'series/series_sidebar.html' with object=show_details %}
     </div>
 
+    <!-- Main part of the page with the season title, image, and description -->
     <div class="col-xs-8 movies">
 
         <div class="col-xs-12 title">
@@ -26,7 +27,7 @@
                 <img src="{{ season_details.poster_path }}" width=100% />
         </div>
 
-        <!--Under season title and next to picture, we have main info linked to the movie-->
+        <!-- Under season title and next to picture, we have main info linked to the movie -->
         <div class="col-xs-8">
 
             <div class="movie-description">
@@ -58,7 +59,7 @@
             </div>
         </div>
 
-        <!--List of episodes in the season, with title, picture, and description-->
+        <!-- List of episodes in the season, with title, picture, and description -->
         <div class="col-xs-12 episodes">
 
         {% for episode in season_details.episodes %}
@@ -90,7 +91,7 @@
         </div>
     </div>
 
-    <!--Add to Favorites button-->
+    <!-- Add to Favorites button -->
     <div class="col-xs-2 favorites">
         <button type="submit" class="favorite-button{% if is_fav %}-added{% endif %}" id="add-fav-button" onclick="add_to_fav({{ request.user.id }}, {{ details.tv_id }})">
             {% if is_fav %}
