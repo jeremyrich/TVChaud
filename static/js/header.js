@@ -1,4 +1,4 @@
-// Fonction pour envoyer une friend request sur l'application
+// Function to send a friend request to another user
 function send_friend_request() {
 
     to_username = $('#friend-username-id').val();
@@ -31,7 +31,7 @@ function send_friend_request() {
 }
 
 
-// Fonction pour accepter une friend request
+// Function to accept a friend request
 function accept_friend_request(friend_request_id) {
 
     url = '/user/ajax/accept_friend_request/';
@@ -43,8 +43,11 @@ function accept_friend_request(friend_request_id) {
         data: {'friend_request_id': friend_request_id},
         success: function(data) {
 
-            $('#friend-request-'.friend_request_id).remove();
-            
+            // The notification is hidden once the user has accepted or declined
+            notification = $('#friend-request-' + friend_request_id);
+            notification.hide();
+
+            // The dropdown menu is reopened
             $('#button-notif-container').addClass('open');
             $('#notif-dropdown-button').attr('aria-expanded', true);
         }
@@ -52,7 +55,7 @@ function accept_friend_request(friend_request_id) {
 }
 
 
-// Fonction qui refuse une friend request
+// Function to decline a friend request
 function decline_friend_request(friend_request_id) {
 
     url = '/user/ajax/decline_friend_request/';
@@ -64,8 +67,11 @@ function decline_friend_request(friend_request_id) {
         data: {'friend_request_id': friend_request_id},
         success: function(data) {
 
-            $('#friend-request-'.friend_request_id).remove();
-            
+            // The notification is hidden once the user has accepted or declined
+            notification = $('#friend-request-' + friend_request_id);
+            notification.hide();
+
+            // The dropdown menu is reopened
             $('#button-notif-container').addClass('open');
             $('#notif-dropdown-button').attr('aria-expanded', true);
         }
@@ -74,7 +80,7 @@ function decline_friend_request(friend_request_id) {
 
 
 
-// Fonction pour cocher la notif comme lue au moment de la redirection vers la page correspondante
+// Function to mark a notification as read when redirecting to the corresponding page
 function see_notif(notif_id) {
 
     url = '/series/ajax/see_notif/';
@@ -91,7 +97,7 @@ function see_notif(notif_id) {
 };
 
 
-// Fonction pour check une notif comem lue ou non lue
+// Function to mark a notification as read or unread
 function check_notif(notif_id) {
     
     url = '/series/ajax/check_notif/';
