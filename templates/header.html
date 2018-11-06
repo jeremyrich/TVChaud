@@ -62,8 +62,14 @@
                                         Friend request from <b>{{ request.from_user }}</b>
                                     </div>
                                     <div class="col-xs-5">
-                                        <button class="btn btn-default" onclick="accept_friend_request({{ request.friend_request_id }})">Accept</button>
-                                        <button class="btn btn-danger" onclick="decline_friend_request({{ request.friend_request_id }})">Decline</button>
+                                        <button class="btn btn-default"
+                                                onclick="accept_friend_request({{ request.friend_request_id }})">
+                                            Accept
+                                        </button>
+                                        <button class="btn btn-danger"
+                                                onclick="decline_friend_request({{ request.friend_request_id }})">
+                                            Decline
+                                        </button>
                                     </div>
                                 </div>
                             </div>
