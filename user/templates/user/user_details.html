@@ -46,12 +46,14 @@
                         <span style="font-style: italic">{{ favorite.overview }}</span>
                     </div>
 
-                    <button type="submit" class="col-xs-5 col-xs-offset-7 favorite-button"
-                            id="remove_fav_button_{{favoritetv_id}}"
-                            onclick="remove_from_fav({{ request.user.id }}, {{ favorite.tv_id }})">
-                        Remove from favorites
+                    {% if user.user_id == request.user.id %}
+                        <button type="submit" class="col-xs-5 col-xs-offset-7 favorite-button"
+                                id="remove_fav_button_{{favoritetv_id}}"
+                                onclick="remove_from_fav({{ request.user.id }}, {{ favorite.tv_id }})">
+                            Remove from favorites
 
-                    </button>
+                        </button>
+                    {% endif %}
 
                 </div>
             </div>
