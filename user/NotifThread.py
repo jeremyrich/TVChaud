@@ -2,6 +2,8 @@ from dbtables.User import User
 from threading import Thread
 from series.APIClient import APIClient
 
+from django.contrib.auth.models import User as djangoUser
+
 
 class NotifThread(Thread):
     
@@ -22,6 +24,17 @@ def load_notifications(request):
 
     myuser = User(request.user.id, request.user.username, request.user.password)
 
+    # PARTIE FRIEND REQUESTS
+    friend_requests_query = myuser.get_friend_requests()
+    friend_requests = []
+
+    for request in friend_requests_query:
+        from_user = djangoUser.objects.get(id=request[1])
+        new_request = {'friend_request_id': request[0], 'from_user': from_user}
+        friend_requests.append(new_request)
+
+
+    # PARTIE NOTIFICATIONS NEW EPISODES
     notifs = myuser.get_notifications()
 
     alert = False
@@ -48,4 +61,4 @@ def load_notifications(request):
             'seen': th.notif.seen}
         new_episodes.append(ep)
 
-    return {'alert': alert, 'new_episodes': new_episodes}
+    return {'alert': alert, 'friend_requests': friend_requests, 'new_episodes': new_episodes}
