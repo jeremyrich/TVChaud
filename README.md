@@ -23,13 +23,14 @@ In the terminal:
         ```
 
 * Activate the environment
-    ```python
-    # On Windows
-    tvchaudenv\Scripts\activate.bat
-    
-    # On MacOS/Linux
-    source tvchaudenv/bin/activate
-    ```
+    * On Windows
+        ```
+        tvchaudenv\Scripts\activate.bat
+        ```
+    * On MacOS/Linux
+        ```
+        source tvchaudenv/bin/activate
+        ```
 
 ## You can now go to the TVChaud folder on your computer
 
