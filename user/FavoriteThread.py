@@ -2,7 +2,7 @@ from threading import Thread
 from dbtables.Favorite import Favorite
 
 """ 
-When Thread is launched, it will make the API call from the get_favorite_details 
+When FavoriteThread is launched, it will make the API call from the get_favorite_details 
 function. Multithreading allows us to make multiple API calls simultaneously
 
 """
@@ -22,12 +22,12 @@ class FavoriteThread(Thread):
         self.details['vote_average'] = result['vote_average']
 
 
-# Fonction pour récuperer la liste des favorites d'un user
+# Function to get the list of favorites for a given user
 def get_user_favorites(user):
 
     favs = user.get_favorites()
 
-    # Threads pour charger les APIs pour les détails des favorites
+    # Threads that get the details for a given tv show with an API call
     threads = [FavoriteThread(fav) for fav in favs]
     fav_details = []
 
