@@ -8,6 +8,7 @@ function remove_from_fav(user_id, tv_id) {
         type: 'get',
         data: {'user_id': user_id, 'tv_id': tv_id},
         success: function(data) {
+
             console.log('removed from favorites');
 
             // The removed favorite is hidden
@@ -16,9 +17,11 @@ function remove_from_fav(user_id, tv_id) {
 
             // The page title is updated with the new number of favorites
             new_title = "Favorites - " + data['num_favorites'] + " show"
+
             if (data['num_favorites'] != 1) {
                 new_title += "s";
             }
+
             $('#favorites_title').text(new_title);
         },
     });

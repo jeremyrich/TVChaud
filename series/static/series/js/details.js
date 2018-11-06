@@ -9,6 +9,7 @@ function add_to_fav(user_id, tv_id) {
         type: 'get',
         data: {'user_id': user_id, 'tv_id': tv_id},
         success: function(data) {
+
             console.log('added to favorites');
 
             // The button updates its display to either "Added to favorites" or "+ Add to favorites"
