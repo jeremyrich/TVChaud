@@ -2,6 +2,11 @@ from dbtables.User import User
 from threading import Thread
 from series.APIClient import APIClient
 
+""" 
+When NotifThread is launched, it will make the API call from the get_favorite_details 
+function. Multithreading allows us to make multiple API calls simultaneously
+
+"""
 
 class NotifThread(Thread):
     
@@ -16,8 +21,7 @@ class NotifThread(Thread):
          self.details['image'] = show_details['poster']
          self.details['title'] = show_details['name']
 
-
-# Fonction destinée à être utilisée à chaque chargement de view, pour loader les notifications dans le header
+# Function to be used every time the view is charged., to load notification into the header
 def load_notifications(request):
 
     myuser = User(request.user.id, request.user.username, request.user.password)
@@ -25,15 +29,13 @@ def load_notifications(request):
     notifs = myuser.get_notifications()
 
     alert = False
-
-    # Threads pour charger les APIs pour l'image et le nom de la série
+    # Thread to load the API calls to get the image and title of the different tv shows
     threads = [NotifThread(notif) for notif in notifs]
     new_episodes = []
 
     for th in threads:
         th.start()
-
-        # Détermine si il y a au moins une notif non lue
+        # Determine if there is at least one unseen notification
         if not th.notif.seen:
             alert = True
 
