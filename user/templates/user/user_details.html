@@ -20,7 +20,7 @@
 
      </div>
 
-    <!--List of user favorites, with show title, picture, and description-->
+    <!-- List of user favorites, with show title, picture, and description -->
     <div class="col-xs-8">
         <div class="big-title" id="favorites_title">Favorites - {{ favorites|length }} show{{ favorites|length|pluralize }}</div>
 
@@ -46,12 +46,12 @@
                         <span style="font-style: italic">{{ favorite.overview }}</span>
                     </div>
 
+                    <!-- There is a button to "Remove from favorites" if the connected user is on his own page -->
                     {% if user.user_id == request.user.id %}
                         <button type="submit" class="col-xs-5 col-xs-offset-7 favorite-button"
                                 id="remove_fav_button_{{favoritetv_id}}"
                                 onclick="remove_from_fav({{ request.user.id }}, {{ favorite.tv_id }})">
                             Remove from favorites
-
                         </button>
                     {% endif %}
 
