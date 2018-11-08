@@ -1,5 +1,12 @@
+#tv-shows-table {
+    width: 100%;
+}
+
+.col-cover {
+    width: 20%;
+}
+
 .cover-btn {
-    margin: 0.5vw;
     display: inline-block;
 }
 
@@ -8,5 +15,23 @@
 }
 
 .serie-cover {
-    width: 18vw;
+    width: 98%;
+    padding: 1%;
+}
+
+.search-tv-shows {
+    font-weight: normal;
+    font-size: 20px;
+
+    color: white;
+    background-color: #333333;
+    border-color: #444444;
+
+    height: 50px;
+    margin-bottom: 30px;
+}
+
+.hide-label-class {
+    color: #444444;
+    width: 100%;
 }

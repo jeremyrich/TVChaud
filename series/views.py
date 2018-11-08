@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from .APIClient import APIClient
+from .APIThread import get_popular_shows
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
 
@@ -17,7 +18,7 @@ from dbtables.Favorite import Favorite
 def home(request):
 
     client = APIClient()
-    movies = client.get_popular_shows()
+    movies = get_popular_shows()
 
     notifs = load_notifications(request)
 

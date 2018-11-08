@@ -21,7 +21,8 @@ function send_friend_request() {
                 dropdown.html(htmltext);
             } else {
                 // Else clean the field
-                dropdown.html(current_html);
+                htmltext = '<div style="text-align:center; color: green" class="col-xs-12">Invitation sent</div>' + current_html;
+                dropdown.html(htmltext);
             };
 
             $('#button-add-friend-container').addClass('open');

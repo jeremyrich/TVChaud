@@ -4,15 +4,35 @@
 
 {% block static %}
     <link rel="stylesheet" type="text/css" href="{% static 'series/css/home.css' %}"/>
+    <script src="{% static 'series/js/home.js' %}"></script>
+    <script src="{% static 'DataTables/datatables.js' %}"></script>
 {% endblock %}
 
 {% block content %}
 
-    <!-- We only display images for the 20 most popular TV shows on the home page,
-    with a link for the corresponding show -->
-    {% for mov in movies %}
-        <a href="{% url 'series:details' mov.tv_id %}" class="cover-btn">
-            <img class="serie-cover" src="{{ mov.poster_path }}" /></a>
-    {% endfor %}
+    <table id="tv-shows-table">
+        <thead hidden>
+            <tr>
+                <th>order</th>
+                <th>col_1</th>
+                <th>col_2</th>
+                <th>col_3</th>
+                <th>col_4</th>
+                <th>col_5</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mov in movies %}
+                {% if forloop.counter0|divisibleby:5 %}<tr><td hidden>forloop.counter0</td>{% endif %}
+                    <td class="col-cover">
+                        <a href="{% url 'series:details' mov.tv_id %}" class="cover-btn">
+                            <img class="serie-cover" src="{% if mov.poster_path is not None %}{{ mov.poster_path }}{% else %}{% static 'icons/black_cover.png' %}{% endif %}"/>
+                        </a>
+                        <div hidden>{{ mov.name }}</div>
+                    </td>
+                {% if forloop.counter|divisibleby:5 or forloop.last %}</tr>{% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}
