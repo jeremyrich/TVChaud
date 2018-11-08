@@ -58,7 +58,7 @@ class User:
 
     # methods for friend requests
     def get_friend_requests(self):
-        command = """SELECT * FROM friend_request WHERE to_user=?"""
+        command = """SELECT * FROM friend_request WHERE to_user=? GROUP BY from_user, to_user"""
         data = (self.__user_id,)
         return query(command, data)
 
@@ -70,20 +70,15 @@ class User:
 
     # Returns the list of friends for the current user
     def get_friends(self):
-        command = """SELECT * FROM friendship WHERE user_id_1=? OR user_id_2=?"""
+        command = """SELECT DISTINCT user_id_2 FROM friendship WHERE user_id_1=? UNION SELECT DISTINCT user_id_1 FROM friendship WHERE user_id_2=?"""
         data = (self.__user_id, self.__user_id)
         friends = query(command, data)
+
         list_friends = []
         for friend in friends:
-    # two possible cases : current user is either user_1 or user_2 is the friendship table
-            if friend[1] == self.__user_id:
-            # We first fetch the dango user given user_id
-                intermediate = djangoUser.objects.get(id=friend[2])
-            # Then we convert it into our customed user object
-                list_friends.append(User(intermediate.id, intermediate.username, intermediate.password))
-            elif friend[2] == self.__user_id:
-                intermediate = djangoUser.objects.get(id=friend[1])
-                list_friends.append(User(intermediate.id, intermediate.username, intermediate.password))
+            intermediate = djangoUser.objects.get(id=friend[0])
+            list_friends.append(User(intermediate.id, intermediate.username, intermediate.password))
+
         return list_friends
 
 

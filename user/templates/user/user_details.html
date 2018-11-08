@@ -13,10 +13,15 @@
      <div class="col-xs-2 menu">
         <div class="user-info-label">Username</div>
         {{ user.username }}<br/><br/>
-        <div class="user-info-label">Friends</div>
-         {% for friend in friends %}
-         {{ friend.username }}<br/>
-         {% endfor %}
+
+        <!-- You are only allowed to view your own friends, not the friends of other users -->
+        {% if user.user_id == request.user.id %}
+            <div class="user-info-label">Friends</div>
+            {% for friend in friends %}
+                <a class="friend-name" href="{% url 'user:user_details' friend.user_id %}">{{ friend.username }}</a>
+                <br/>
+            {% endfor %}
+        {% endif %}
 
      </div>
 
