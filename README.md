@@ -46,4 +46,6 @@ Here are their specifications.
 
 With TVChaud, once logged in, you can navigate through TV shows, check out the cast, synopsis, similar shows etc, as well as season details, episodes resumes. You can also add shows to your favorites, add friends by typing their username in the invite bar and visualize your friends favorites. The notification button turns red when you have a new friend request or a new episode to watch.
 
+(Unfortunately, the facebook login only works on mac in localhost.)
+
 You can try to consult series, add them to your favorites, invite friends and read your notifications. Enjoy !
