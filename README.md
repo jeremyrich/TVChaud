@@ -18,11 +18,11 @@ In the terminal:
 * Activate the environment
     * On Windows
         ```
-        venv\Scripts\activate.bat
+        venvwindows\Scripts\activate.bat
         ```
     * On MacOS/Linux
         ```
-        source venv/bin/activate
+        source venvmaclinux/bin/activate
         ```
 * Then run the django server
     ```

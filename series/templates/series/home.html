@@ -10,6 +10,7 @@
 
 {% block content %}
 
+    <!-- In order to use datatable (which we need for the search feature), we load all tv shows in a table -->
     <table id="tv-shows-table">
         <thead hidden>
             <tr>
@@ -23,6 +24,7 @@
         </thead>
         <tbody>
             {% for mov in movies %}
+                <!-- We need to put 5 tv show covers in each row -->
                 {% if forloop.counter0|divisibleby:5 %}<tr><td hidden>forloop.counter0</td>{% endif %}
                     <td class="col-cover">
                         <a href="{% url 'series:details' mov.tv_id %}" class="cover-btn">

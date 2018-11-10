@@ -5,16 +5,16 @@ from series.APIClient import APIClient
 from django.contrib.auth.models import User as djangoUser
 
 """ 
-When NotifThread is launched, it will make the API call from the get_favorite_details 
+When NotifThread is launched, it will make the API call from the get_tv_show_details 
 function. Multithreading allows us to make multiple API calls simultaneously
 
 """
 
 class NotifThread(Thread):
     
-    def __init__(self, clientAPI, notif):
+    def __init__(self, notif):
         Thread.__init__(self)
-        self.clientAPI = clientAPI
+        self.clientAPI = APIClient()
         self.notif = notif
         self.details = {'image': None, 'title': None}
 
@@ -23,7 +23,8 @@ class NotifThread(Thread):
          self.details['image'] = show_details['poster']
          self.details['title'] = show_details['name']
 
-# Function to be used every time the view is charged., to load notification into the header
+
+# Function to be used every time a view is loaded, to load notification into the header
 def load_notifications(request):
 
     myuser = User(request.user.id, request.user.username, request.user.password)
@@ -41,16 +42,14 @@ def load_notifications(request):
     # PART NOTIFICATIONS NEW EPISODES
     notifs = myuser.get_notifications()
 
-    client = APIClient()
-
     alert = False
     # Thread to load the API calls to get the image and title of the different tv shows
-    threads = [NotifThread(client, notif) for notif in notifs]
+    threads = [NotifThread(notif) for notif in notifs]
     new_episodes = []
 
     for th in threads:
         th.start()
-        # Determine if there is at least one unseen notification
+        # Determines if there is at least one unseen notification
         if not th.notif.seen:
             alert = True
 

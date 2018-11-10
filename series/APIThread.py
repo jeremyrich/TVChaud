@@ -7,9 +7,9 @@ from .APIClient import APIClient
 class APIThread(Thread):
 
     # constructor
-    def __init__(self, clientAPI, page):
+    def __init__(self, page):
         Thread.__init__(self)
-        self.clientAPI = clientAPI
+        self.clientAPI = APIClient()
         self.page = page
         self.shows_list = [] 
 
@@ -29,10 +29,8 @@ class APIThread(Thread):
 def get_popular_shows():
     popular = []
 
-    client = APIClient()
-
     # we are going to create 20 threads to get the 20 first pages of the API popular_shows
-    threads = [APIThread(client, page) for page in range(1,21)]
+    threads = [APIThread(page) for page in range(1,21)]
 
     for th in threads:
         th.start()
