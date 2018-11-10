@@ -30,7 +30,7 @@ class Favorite():
 
     # method to check if a tv show is in the favorites of the current user
     def is_in_db(self):
-        command = """SELECT * FROM favorite WHERE user_id = :user_id AND tv_id = :tv_id"""
+        command = """SELECT * FROM favorite WHERE user_id = ? AND tv_id = ?"""
         data = (self.__user_id, self.__tv_id)
         result = query(command, data)
         return len(result) > 0

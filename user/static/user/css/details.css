@@ -21,15 +21,9 @@ img {
     color: #0096FF;
 }
 
-/* .user-name {
-    color: lightgray;
-    font-size: 36px;
-    text-align: left;
-    vertical-align: top;
-    font-weight: bold;
-    padding-bottom: 5px;
-    padding-top: 10px
-} */
+.friend-name {
+    color: white;
+}
 
 .title {
     font-size: 20px;

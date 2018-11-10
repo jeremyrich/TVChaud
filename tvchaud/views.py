@@ -14,12 +14,8 @@ def mylogin(request):
 
     else:
         form = AuthenticationForm()
-        form.fields['username'].widget.attrs['class'] = 'form-control login-div login-field'
-        form.fields['username'].widget.attrs['placeholder'] = 'Username'
-        form.fields['password'].widget.attrs['class'] = 'form-control login-div login-field'
-        form.fields['password'].widget.attrs['placeholder'] = 'Password'
 
-    return render(request, 'login.html', locals())
+    return render(request, 'login.html', {'form': form})
 
 
 # logout redirect

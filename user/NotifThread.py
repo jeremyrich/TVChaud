@@ -12,14 +12,14 @@ function. Multithreading allows us to make multiple API calls simultaneously
 
 class NotifThread(Thread):
     
-    def __init__(self, notif):
+    def __init__(self, clientAPI, notif):
         Thread.__init__(self)
+        self.clientAPI = clientAPI
         self.notif = notif
         self.details = {'image': None, 'title': None}
 
     def run(self):
-         client = APIClient()
-         show_details = client.get_tv_show_details(self.notif.tv_id)
+         show_details = self.clientAPI.get_tv_show_details(self.notif.tv_id)
          self.details['image'] = show_details['poster']
          self.details['title'] = show_details['name']
 
@@ -28,7 +28,7 @@ def load_notifications(request):
 
     myuser = User(request.user.id, request.user.username, request.user.password)
 
-    # PARTIE FRIEND REQUESTS
+    # PART FRIEND REQUESTS
     friend_requests_query = myuser.get_friend_requests()
     friend_requests = []
 
@@ -38,12 +38,14 @@ def load_notifications(request):
         friend_requests.append(new_request)
 
 
-    # PARTIE NOTIFICATIONS NEW EPISODES
+    # PART NOTIFICATIONS NEW EPISODES
     notifs = myuser.get_notifications()
+
+    client = APIClient()
 
     alert = False
     # Thread to load the API calls to get the image and title of the different tv shows
-    threads = [NotifThread(notif) for notif in notifs]
+    threads = [NotifThread(client, notif) for notif in notifs]
     new_episodes = []
 
     for th in threads:
@@ -63,4 +65,4 @@ def load_notifications(request):
             'seen': th.notif.seen}
         new_episodes.append(ep)
 
-    return {'alert': alert, 'friend_requests': friend_requests, 'new_episodes': new_episodes}
+    return {'alert': (alert or len(friend_requests) > 0), 'friend_requests': friend_requests, 'new_episodes': new_episodes}
