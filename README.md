@@ -12,7 +12,7 @@ POOA project - Thomas Bellec, Edouard Borel, Hugo Martinet
 In the terminal:
 * Go to the project directory
     ```
-    cd path/to/folder/TVChaud
+    cd path/to/folder/
     ```
 
 * Activate the environment
