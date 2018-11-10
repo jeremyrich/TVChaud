@@ -32,7 +32,7 @@ def get_popular_shows():
     client = APIClient()
 
     # we are going to create 20 threads to get the 20 first pages of the API popular_shows
-    threads = [APIThread(client, page) for page in range(20)]
+    threads = [APIThread(client, page) for page in range(1,21)]
 
     for th in threads:
         th.start()
