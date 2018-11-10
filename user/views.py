@@ -54,8 +54,9 @@ def ajax_remove_favorite(request):
 
     intermediate = djangoUser.objects.get(id=user_id)
     user = User(intermediate.id, intermediate.username, intermediate.password)
+
     # We call the multithreading to get the user's favorites details,
-    # # to change the page title adapted to the new number of favorites
+    # to change the page title adapted to the new number of favorites
     favorites = get_user_favorites(user)
     num_favorites = len(favorites)
 

@@ -29,10 +29,20 @@ class APIClient:
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id)
         details = self.call('GET', url)
 
-        realisateurs = 'Unknown' if len(details['created_by']) == 0 else ', '.join([real['name'] for real in details['created_by']])
-        genres = 'Not identified' if len(details['genres']) == 0 else ', '.join([g['name'] for g in details['genres']])
+        try:
+            realisateurs = 'Unknown' if len(details['created_by']) == 0 else ', '.join([real['name'] for real in details['created_by']])
+        except KeyError:
+            realisateurs = 'Unknown'
 
-        origins = 'Unknown' if len(details['origin_country']) == 0 else details['origin_country'][0]
+        try:
+            genres = 'Not identified' if len(details['genres']) == 0 else ', '.join([g['name'] for g in details['genres']])
+        except KeyError:
+            genres = 'Not identified'
+
+        try:
+            origins = 'Unknown' if len(details['origin_country']) == 0 else details['origin_country'][0]
+        except KeyError:
+            origins = 'Unknown'
 
         show_seasons = []
 
