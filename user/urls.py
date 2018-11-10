@@ -23,13 +23,11 @@ app_name = 'user'
 urlpatterns = [
     url(r'^(?P<user_id>[0-9]+)/$', views.user_details, name='user_details'),
 
-    # ajax pour ajouter un favori
+    # ajax calls for favorites
     url(r'^ajax/add_to_favorites/$', views.ajax_add_favorite, name="ajax_add_favorite"),
-
-    # ajax pour enlever un favori
     url(r'^ajax/remove_from_favorites/$', views.ajax_remove_favorite, name="ajax_remove_favorite"),
 
-    # ajax pour les friend requests
+    # ajax calls for friend requests
     url(r'^ajax/send_friend_request/$', views.ajax_send_friend_request, name="ajax_send_friend_request"),
     url(r'^ajax/accept_friend_request/$', views.ajax_accept_friend_request, name="ajax_accept_friend_request"),
     url(r'^ajax/decline_friend_request/$', views.ajax_decline_friend_request, name="ajax_decline_friend_request"),

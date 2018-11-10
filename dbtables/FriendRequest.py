@@ -26,12 +26,13 @@ class FriendRequest():
 
 
     # methods
+    # Creates the friendship objects resulting from the friend request
     def accept(self):
         command = """INSERT INTO friendship(user_id_1, user_id_2) VALUES(?, ?)"""
         data = (self.__from_user, self.__to_user)
         query(command, data)
 
-
+    # Deletes a friend request (when either accepter or declined)
     def delete(self):
         command = """DELETE FROM friend_request WHERE friend_request_id = ?"""
         data = (self.__friend_request_id,)

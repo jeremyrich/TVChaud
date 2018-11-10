@@ -20,13 +20,8 @@ class Favorite():
     user_id = property(_get_user_id)
     tv_id = property(_get_tv_id)
 
-    # Methods to work on the Favorite object
 
-    # API call : Returns the tv show's details of the current favorite
-    def get_favorite_details(self):
-        client = APIClient()
-        details = client.get_tv_show_details(self.tv_id)
-        return details
+    # Methods to work on the Favorite object
 
     # method to check if a tv show is in the favorites of the current user
     def is_in_db(self):

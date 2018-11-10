@@ -7,10 +7,11 @@ import requests
 
 class APIClient:
 
+    # constructor : we store the API key at this moment so we can use it at will
     def __init__(self):
         self.api_key = settings.TMDB_API_KEY
 
-    # Fonction d'appel de l'API TheMovieDB : elle permet de rajouter l'API Key à la suite de l'url et de lancer la requête
+    # Call function for TheMovieDB API : this allows us to concatenate the API key and the arguments at the end of the URL
     def call(self, method, url, **kwargs):
         
         if method == 'GET':
@@ -24,7 +25,7 @@ class APIClient:
         return response.json()
 
 
-    # API Call : Retourne la fiche détail d'un TV show en particulier
+    # API Call : Returns the detail sheet of a specific tv show
     def get_tv_show_details(self, tv_id):
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id)
         details = self.call('GET', url)
@@ -70,7 +71,7 @@ class APIClient:
         return details_useful
 
 
-    # API Call : Retourne le casting du TV show en argument
+    # API Call : Returns the cast of a specific tv show
     def get_tv_show_cast(self, tv_id):
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/credits'
         credits = self.call('GET', url)
@@ -81,7 +82,7 @@ class APIClient:
         return credits['cast']
 
 
-    # API Call : Retourne les reviews du TV show en argument
+    # API Call : Returns the reviews of a specific tv show
     def get_tv_shows_reviews(self, tv_id):
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/reviews'
         reviews = self.call('GET', url)
@@ -91,7 +92,7 @@ class APIClient:
         return reviews['results']
 
 
-    # API Call : Retourne les recommandations de shows similaires (dans la limite de 12 shows)
+    # API Call : Returns the similar shows of a specific tv show (the first 12)
     def get_tv_shows_similar(self, tv_id):
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/similar'
         similar = self.call('GET', url)
@@ -105,7 +106,7 @@ class APIClient:
         return similar['results'][:12]
 
 
-    # API Call : Retourne les détails de la saison d'un TV show donnés en argument
+    # API Call : Returns the detail sheet of a specific tv show and season
     def get_season_details(self, tv_id, season_number):
         url = 'https://api.themoviedb.org/3/tv/' + str(tv_id) + '/season/' + str(season_number)
         season_details = self.call('GET', url)
